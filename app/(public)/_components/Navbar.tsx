@@ -27,7 +27,7 @@ export default function Navbar() {
                     {/* Links — só aparece em telas grandes */}
                     <ul className="hidden md:flex items-center gap-8">
                         <li>
-                            <Link href="/" className="text-[15px] font-semibold text-slate-800 border-b-2 border-[#C88DCF] pb-1">
+                            <Link href="/" className="text-[15px] font-semibold text-slate-800 ">
                                 Home
                             </Link>
                         </li>
