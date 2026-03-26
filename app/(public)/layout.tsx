@@ -1,3 +1,4 @@
+import Navbar from "./_components/Navbar";
 import { ReactNode } from "react";
 
 export default function PublicLayout({
@@ -9,8 +10,7 @@ export default function PublicLayout({
     <>
      <div className="min-h-screen bg-white text-slate-900">
       <header>
-        <h1>GAAPO</h1>
-        {/* Navbar depois você cria */}
+        <Navbar />
       </header>
 
       <main>{children}</main>
