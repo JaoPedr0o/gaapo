@@ -13,36 +13,36 @@ export default function Navbar() {
                         <Image
                             src={logo}
                             alt="Logo GAAPO"
-                            width={128}
+                            width={150}
                             height={40}
                             priority
                         />
                     </Link>
 
                     {/* Links */}
-                    <ul className="flex items-center gap-8">
+                    <ul className="pl-100 flex items-center gap-10">
                         <li>
-                            <Link href="/" className="text-[15px] font-semibold text-slate-800 hover:text-[#C88DCF]">
+                            <Link href="/" className="text-[17px] font-semibold text-slate-800 hover:text-[#C88DCF]">
                                 Home
                             </Link>
                         </li>
                         <li>
-                            <Link href="/adocao" className="text-[15px] font-semibold text-slate-800 hover:text-[#C88DCF]">
+                            <Link href="/adocao" className="text-[17px] font-semibold text-slate-800 hover:text-[#C88DCF]">
                                 Adoção
                             </Link>
                         </li>
                         <li>
-                            <Link href="/doacao" className="text-[15px] font-semibold text-slate-800 hover:text-[#C88DCF]">
+                            <Link href="/doacao" className="text-[17px] font-semibold text-slate-800 hover:text-[#C88DCF]">
                                 Doação
                             </Link>
                         </li>
                         <li>
-                            <Link href="/eventos" className="text-[15px] font-semibold text-slate-800 hover:text-[#C88DCF]">
+                            <Link href="/eventos" className="text-[17px] font-semibold text-slate-800 hover:text-[#C88DCF]">
                                 Eventos
                             </Link>
                         </li>
                         <li>
-                            <Link href="/contas" className="text-[15px] font-semibold text-slate-800 hover:text-[#C88DCF]">
+                            <Link href="/contas" className="text-[17px] font-semibold text-slate-800 hover:text-[#C88DCF]">
                                 Contas
                             </Link>
                         </li>
