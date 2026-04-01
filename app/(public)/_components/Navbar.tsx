@@ -69,7 +69,7 @@ export default function Navbar() {
                                 element.scrollIntoView({ behavior: 'smooth' });
                             }
                         }}
-                        className="hidden md:inline-flex bg-[#C88DCF] hover:bg-[#b87ec0] px-6 py-2.5 rounded-md font-bold uppercase text-white text-[13px] tracking-widest transition-colors"
+                        className="hidden md:inline-flex bg-[#B569BE] hover:bg-[#a85ab0] px-6 py-2.5 rounded-md font-bold uppercase text-white text-[13px] tracking-widest transition-colors"
                     >
                         Contato
                     </button>
