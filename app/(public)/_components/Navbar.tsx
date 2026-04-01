@@ -2,11 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "./assets/Logo.svg";
 
 export default function Navbar() {
     const [menuAberto, setMenuAberto] = useState(false);
+    const [exibirMenu, setExibirMenu] = useState(false);
+
+    useEffect(() => {
+        if (!menuAberto && exibirMenu) {
+            const timeout = setTimeout(() => setExibirMenu(false), 300);
+            return () => clearTimeout(timeout);
+        }
+    }, [menuAberto, exibirMenu]);
 
     return (
         <nav className="bg-white border-b-2 border-[#C88DCF]">
@@ -63,7 +71,10 @@ export default function Navbar() {
 
                     {/* Ícone hambúrguer — só aparece em telas pequenas */}
                     <button
-                        onClick={() => setMenuAberto(true)}
+                        onClick={() => {
+                            setExibirMenu(true);
+                            requestAnimationFrame(() => setMenuAberto(true));
+                        }}
                         className="md:hidden flex flex-col gap-[6px] p-2"
                         aria-label="Abrir menu"
                     >
@@ -76,17 +87,17 @@ export default function Navbar() {
             </div>
 
             {/* Menu mobile — painel que abre à direita */}
-            {menuAberto && (
+            {exibirMenu && (
                 <div className="fixed inset-0 z-50 md:hidden">
 
                     {/* Fundo escurecido ao clicar fora fecha o menu */}
                     <div
-                        className="absolute inset-0 bg-black/20"
+                        className={`absolute inset-0 bg-black transition-opacity duration-300 ${menuAberto ? "opacity-50" : "opacity-0"}`}
                         onClick={() => setMenuAberto(false)}
                     />
 
                     {/* Painel lateral direito */}
-                    <div className="absolute top-0 right-0 w-[220px] h-full bg-white border-l-2 border-[#C88DCF] flex flex-col">
+                    <div className={`absolute top-0 right-0 w-[220px] h-full bg-white border-l-2 border-[#C88DCF] flex flex-col transform transition-transform duration-300 ease-in-out ${menuAberto ? "translate-x-0" : "translate-x-full"}`}>
 
                         {/* Cabeçalho do painel com logo e botão fechar */}
                         <div className="flex items-center justify-between px-4 h-[72px] border-b-2 border-[#C88DCF]">
