@@ -116,7 +116,7 @@ export default function Contato() {
         }
 
         .contato-btn:hover {
-          background: #a85ab0;
+          background: #7c3aed;
           transform: translateY(-2px);
         }
 
