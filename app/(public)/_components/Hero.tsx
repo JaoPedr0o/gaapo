@@ -1,7 +1,9 @@
+"use client";
+
 import heroDog from "./assets/CachorrosHero.svg";
 import Image from "next/image";
 import hero from '../../public/404-animais.svg';
-export default function Hero(){
+export default function Hero() {
     return(
         <div>
 
@@ -21,11 +23,19 @@ export default function Hero(){
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry
                             </p>
                             <div className="pt-4 py-8 flex items-center justify-center lg:justify-start  gap-4">
-                                <a href="#"
+
+                                {/* Botão de Contato - ao clicar, rola suavemente para a seção de contato */}
+                                <button
+                                    onClick={() => {
+                                        const element = document.getElementById('contato');
+                                        if (element) {
+                                            element.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }}
                                     className="bg-[#B569BE] hover:bg-[#a85ab0] px-10 py-3 rounded-lg font-bold uppercase text-white inline-flex items-center justify-center transition-colors"
                                 >
                                     Contato
-                                </a>
+                                </button>
                             </div>
                         </div>
 

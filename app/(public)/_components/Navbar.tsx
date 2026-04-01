@@ -62,12 +62,17 @@ export default function Navbar() {
                     </ul>
 
                     {/* Botão Contato — só aparece em telas grandes */}
-                    <Link
-                        href="/contato"
+                    <button
+                        onClick={() => {
+                            const element = document.getElementById('contato');
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
                         className="hidden md:inline-flex bg-[#C88DCF] hover:bg-[#b87ec0] px-6 py-2.5 rounded-md font-bold uppercase text-white text-[13px] tracking-widest transition-colors"
                     >
                         Contato
-                    </Link>
+                    </button>
 
                     {/* Ícone hambúrguer — só aparece em telas pequenas */}
                     <button
