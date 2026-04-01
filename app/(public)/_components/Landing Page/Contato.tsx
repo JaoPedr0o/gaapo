@@ -18,6 +18,7 @@ export default function Contato() {
 
   return (
     <>
+    
       <style>{`
         .contato-section {
           background: #FFC8D6;

@@ -1,8 +1,7 @@
 "use client";
 
-import heroDog from "./assets/CachorrosHero.svg";
 import Image from "next/image";
-import hero from '../../public/404-animais.svg';
+import heroDog from "../assets/CachorrosHero.svg";
 export default function Hero() {
     return(
         <div>

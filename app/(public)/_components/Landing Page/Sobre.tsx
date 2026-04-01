@@ -1,8 +1,8 @@
 // app/(public)/_components/Sobre.tsx
 
 import Image from "next/image";
-import sobreImg from "./assets/Sobre-img.png";
-import sobreBg from "./assets/Sobre.svg";
+import sobreImg from "../assets/Sobre-img.png";
+import sobreBg from "../assets/Sobre.svg";
 
 export default function Sobre() {
   return (

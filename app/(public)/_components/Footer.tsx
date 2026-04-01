@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import logo from "./assets/LogoBranca.svg";
 import paw from "./assets/paw.svg";
 import facebookIcon from "./assets/Facebook.svg";
@@ -6,8 +9,29 @@ import whatsappIcon from "./assets/WhatsApp.svg";
 import instagramIcon from "./assets/Instagram.svg";
 
 export default function Footer() {
+  const pathname = usePathname();
+  let waveColor = "#FFC8D6";
+  let footerColor = "#9B5FA8";
+
+  {/* Define as cores da onda e do rodapé com base na rota atual */}
+  if (pathname === "/") {
+    waveColor = "#FFC8D6";
+    footerColor = "#9B5FA8";
+  } else if (pathname === "/adocao") {
+    waveColor = "#C1E1C1";
+    footerColor = "#64A454";
+  } else if (pathname === "/doacao") {
+    waveColor = "#B3E5FC";
+    footerColor = "#2B8CB4";
+  } else if (pathname === "/eventos") {
+    waveColor = "#FCE6A8";
+    footerColor = "#C68F2E";
+  } else if (pathname === "/contas") {
+    waveColor = "#E9D6FF";
+    footerColor = "#7F47A5";
+  }
   return (
-    <footer className="relative bg-[#9B5FA8] text-white overflow-hidden">
+    <footer className={`relative text-white overflow-hidden`} style={{ backgroundColor: footerColor }}>
       
       {/* ONDA */}
       <div className="absolute top-0 left-0 w-full">
@@ -19,9 +43,9 @@ export default function Footer() {
 
 
 
-          {/* O caminho da onda, preenchido com a cor de fundo do footer */}
+          {/* O caminho da onda, preenchido com a cor dinâmica por rota */}
           <path
-            fill="#FFC8D6"
+            fill={waveColor}
             d="M0,64 C240,0 480,0 720,40 C960,80 1200,80 1440,40 L1440,0 L0,0 Z"
           />
         </svg>
