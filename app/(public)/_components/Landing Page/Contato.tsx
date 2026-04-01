@@ -11,9 +11,10 @@ const poppins = Poppins({
 export default function Contato() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [descricao, setDescricao] = useState("");
 
   const handleSubmit = () => {
-    console.log({ nome, email });
+    console.log({ nome, email, descricao });
   };
 
   return (
@@ -82,7 +83,7 @@ export default function Contato() {
         .contato-input {
           padding: 12px 18px;
           border-radius: 10px;
-          border: 1.5px solid rgba(0,0,0,0.1);
+          border: 3px solid #C88DCF;
           background: #fff;
           font-size: 15px;
           color: #3a2a2a;
@@ -103,15 +104,15 @@ export default function Contato() {
           border: none;
           border-radius: 12px;
           margin-top: 10px;
-          padding: 15px 35px;
-          font-size: 15px;
+          padding: 13px 26px;
+          font-size: 12px;
           font-weight: 800;
           letter-spacing: 1.6px;
           text-transform: uppercase;
           cursor: pointer;
           font-family: inherit;
           transition: background 0.2s, transform 0.1s;
-          align-self: flex-start;
+          align-self: center;
         }
 
         .contato-btn:hover {
@@ -169,8 +170,10 @@ export default function Contato() {
             font-size: 14px;
           }
           .contato-btn {
-            align-self: stretch;
-            padding: 16px;
+            align-self: center;
+            width: auto;
+            min-width: 140px;
+            padding: 13px 16px;
             margin-top: 8px;
           }
         }
@@ -202,6 +205,13 @@ export default function Contato() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <textarea
+              className="contato-input"
+              placeholder="Descrição"
+              rows={4}
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
             />
             <button className="contato-btn" onClick={handleSubmit}>
               Contato
