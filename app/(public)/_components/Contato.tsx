@@ -20,7 +20,7 @@ export default function Contato() {
     <>
       <style>{`
         .contato-section {
-          background: #F9A8BE;
+          background: #FFC8D6;
           position: relative;
           overflow: hidden;
           padding: 160px 80px;

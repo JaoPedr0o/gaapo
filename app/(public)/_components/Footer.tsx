@@ -21,7 +21,7 @@ export default function Footer() {
 
           {/* O caminho da onda, preenchido com a cor de fundo do footer */}
           <path
-            fill="#F9A8BE"
+            fill="#FFC8D6"
             d="M0,64 C240,0 480,0 720,40 C960,80 1200,80 1440,40 L1440,0 L0,0 Z"
           />
         </svg>
