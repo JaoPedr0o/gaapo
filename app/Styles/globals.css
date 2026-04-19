@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Cores extraídas do seu design */
+  --gaapo-pink: #F8BBD0;
+  --gaapo-yellow: #FFD54F;
+  --gaapo-blue: #C8F6FF;
+  --gaapo-purple: #CE93D8;
+  --gaapo-dark: #212121;
+}
+
+@theme inline {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui;
+
+  --color-brand-pink: var(--gaapo-pink);
+  --color-brand-yellow: var(--gaapo-yellow);
+  --color-brand-blue: var(--gaapo-blue);
+  --color-brand-purple: var(--gaapo-purple);
+  --color-brand-dark: var(--gaapo-dark);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: bottom;
+}
