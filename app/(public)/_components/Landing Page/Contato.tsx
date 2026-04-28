@@ -18,207 +18,64 @@ export default function Contato() {
   };
 
   return (
-    <>
-    
-      <style>{`
-        .contato-section {
-          background: #FFC8D6;
-          position: relative;
-          overflow: hidden;
-          padding: 160px 80px;
-          font-family: inherit;
-          min-height: 560px;
-          display: flex;
-          align-items: center;
-        }
-
-        .contato-inner {
-          max-width: 1100px;
-          width: 100%;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 100px;
-        }
-
-        .contato-left {
-          flex: 1 1 340px;
-          max-width: 480px;
-        }
-
-        .contato-badge {
-          display: inline-block;
-          background: #38C9C9;
-          border-radius: 12px 40px 36px 16px / 20px 16px 28px 38px;
-          padding: 18px 36px;
-          margin-bottom: 32px;
-        }
-
-        .contato-badge h2 {
-          margin: 0;
-          font-size: 34px;
-          font-weight: 800;
-          color: #fff;
-          letter-spacing: -0.5px;
-          font-family: inherit;
-        }
-
-        .contato-desc {
-          margin: 0;
-          font-size: 20px;
-          line-height: 1.8;
-          color: #000;
-          font-weight: 600;
-        }
-
-        .contato-right {
-          flex: 1 1 340px;
-          max-width: 480px;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .contato-input {
-          padding: 12px 18px;
-          border-radius: 10px;
-          border: 3px solid #C88DCF;
-          background: #fff;
-          font-size: 15px;
-          color: #3a2a2a;
-          outline: none;
-          font-family: inherit;
-          transition: border-color 0.2s;
-          width: 100%;
-          box-sizing: border-box;
-        }
-
-        .contato-input:focus {
-          border-color: #38C9C9;
-        }
-
-        .contato-btn {
-          background: #B569BE;
-          color: #fff;
-          border: none;
-          border-radius: 12px;
-          margin-top: 10px;
-          padding: 13px 26px;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1.6px;
-          text-transform: uppercase;
-          cursor: pointer;
-          font-family: inherit;
-          transition: background 0.2s, transform 0.1s;
-          align-self: center;
-        }
-
-        .contato-btn:hover {
-          background: #7c3aed;
-          transform: translateY(-2px);
-        }
-
-        .contato-btn:active {
-          transform: translateY(1px);
-        }
-
-        /* Tablet */
-        @media (max-width: 900px) {
-          .contato-section {
-            padding: 100px 48px;
-            min-height: 460px;
-          }
-          .contato-inner {
-            gap: 60px;
-          }
-          .contato-badge h2 {
-            font-size: 26px;
-          }
-          .contato-desc {
-            font-size: 17px;
-          }
-        }
-
-        /* Mobile */
-        @media (max-width: 580px) {
-          .contato-section {
-            padding: 60px 20px;
-            min-height: unset;
-          }
-          .contato-inner {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 30px;
-          }
-          .contato-left {
-            max-width: 100%;
-            text-align: center;
-          }
-          .contato-badge {
-            display: block;
-            text-align: center;
-          }
-          .contato-right {
-            max-width: 100%;
-            width: 100%;
-            gap: 12px;
-          }
-          .contato-input {
-            padding: 10px 16px;
-            font-size: 14px;
-          }
-          .contato-btn {
-            align-self: center;
-            width: auto;
-            min-width: 140px;
-            padding: 13px 16px;
-            margin-top: 8px;
-          }
-        }
-      `}</style>
-
-      <section className={`contato-section ${poppins.className}`} id="contato">
-        <div className="contato-inner">
-          <div className="contato-left">
-            <div className="contato-badge">
-              <h2>Tem alguma dúvida?</h2>
-            </div>
-            <p className="contato-desc">
-              Entre em contato com a GAAPO. Nossa equipe está à disposição para
-              ajudar e responder suas mensagens.
-            </p>
+    <section
+      id="contato"
+      className={`bg-[#FFC8D6] relative overflow-hidden 
+      py-20 sm:py-24 md:py-28 lg:py-36 xl:py-40
+      px-6 sm:px-10 md:px-14 lg:px-20
+      flex items-center ${poppins.className}`}
+    >
+      <div className="max-w-7xl w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 xl:gap-28">
+        
+        {/* Esquerda */}
+        <div className="w-full lg:max-w-[480px] text-center lg:text-left">
+          <div className="inline-block bg-[#38C9C9] rounded-[12px_40px_36px_16px/20px_16px_28px_38px] py-4 px-6 sm:px-8 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight">
+              Tem alguma dúvida?
+            </h2>
           </div>
 
-          <div className="contato-right">
-            <input
-              className="contato-input"
-              type="text"
-              placeholder="Nome"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-            />
-            <input
-              className="contato-input"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <textarea
-              className="contato-input"
-              placeholder="Descrição"
-              rows={4}
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-            />
-            <button className="contato-btn" onClick={handleSubmit}>
-              Contato
-            </button>
-          </div>
+          <p className="text-base sm:text-lg lg:text-[20px] leading-relaxed font-semibold text-black max-w-[500px] mx-auto lg:mx-0">
+            Entre em contato com a GAAPO. Nossa equipe está à disposição para
+            ajudar e responder suas mensagens.
+          </p>
         </div>
-      </section>
-    </>
+
+        {/* Direita*/}
+        <div className="w-full lg:max-w-[480px] flex flex-col gap-4">
+          
+          <input
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            type="text"
+            placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
+
+          <input
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <textarea
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            placeholder="Descrição"
+            rows={4}
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          />
+
+          <button
+                onClick={handleSubmit}
+                className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center lg:self-start min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105"
+              >
+                Contato
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
