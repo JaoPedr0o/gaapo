@@ -27,7 +27,7 @@ export default function Contato() {
     >
       <div className="max-w-7xl w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 xl:gap-28">
         
-        {/* LEFT */}
+        {/* Esquerda */}
         <div className="w-full lg:max-w-[480px] text-center lg:text-left">
           <div className="inline-block bg-[#38C9C9] rounded-[12px_40px_36px_16px/20px_16px_28px_38px] py-4 px-6 sm:px-8 mb-6 sm:mb-8">
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight">
@@ -41,7 +41,7 @@ export default function Contato() {
           </p>
         </div>
 
-        {/* RIGHT */}
+        {/* Direita*/}
         <div className="w-full lg:max-w-[480px] flex flex-col gap-4">
           
           <input
@@ -69,12 +69,10 @@ export default function Contato() {
           />
 
           <button
-            onClick={handleSubmit}
-            className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer transition-all self-center lg:self-start
-            hover:bg-[#7c3aed] hover:-translate-y-0.5 active:translate-y-[1px]
-            min-w-[160px]"
-          >
-            Contato
+                onClick={handleSubmit}
+                className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center lg:self-start min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105"
+              >
+                Contato
           </button>
         </div>
       </div>
