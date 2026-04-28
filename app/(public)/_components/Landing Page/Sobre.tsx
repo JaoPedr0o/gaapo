@@ -1,5 +1,5 @@
 import Image from "next/image";
-import sobreImg from "../assets/Sobre-img.png";
+import sobreImg from "../assets/Sobre.svg";
 
 export default function Sobre() {
   return (

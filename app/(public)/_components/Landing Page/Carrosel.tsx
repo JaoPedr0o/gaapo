@@ -65,6 +65,15 @@ const animais: Animal[] = [
     temperamento: "Afetuosa e tímida",
     imagemUrl: "/img/mia.jpg"
   },
+  {
+    id: 6,
+    nome: "Pompom",
+    descricao: "Gata tranquila, adora uma boa soneca ao sol.",
+    idade: "1 ano",
+    sexo: "Fêmea",
+    temperamento: "Afetuosa e tímida",
+    imagemUrl: "/img/mia.jpg"
+  },
 
 ];
 
