@@ -40,7 +40,7 @@ const animais: Animal[] = [
     idade: "1 ano",
     sexo: "Macho",
     temperamento: "Afetuoso e brincalhão",
-    imagemUrl: "/img/mia.jpg",
+    imagemUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/07/raca-de-cachorro-muito-popular-no-brasil-3.jpg",
   },
   {
     id: 4,

@@ -67,6 +67,7 @@ export default function Mapa() {
                 className="w-full h-full"
             />
         </div>
+        
           </div>
         </div>
       </div>
