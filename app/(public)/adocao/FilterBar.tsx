@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+
 type Props = {
   species: string;
   setSpecies: (value: string) => void;
@@ -5,22 +7,25 @@ type Props = {
 
 export default function FilterBar({ species, setSpecies }: Props) {
   return (
-    <div className="items-center">
-      {/* BOTÃO (visual) */}
-      <button className="bg-white px-4 py-2 rounded-full shadow">
-        Filtrar
-      </button>
+    <div className="flex items-center">
+      <div className="flex items-center bg-white h-11 px-4 rounded-full shadow">
+        
+        <div className="flex items-center">
+          <Icon icon="mdi:filter" width="20"></Icon>
+          <p className="mr-2">Filtrar:</p>
+        </div>
 
-      {/* DROPDOWN */}
-      <select
-        value={species}
-        onChange={(e) => setSpecies(e.target.value)}
-        className="px-3 py-2 rounded-full border outline-none bg-white"
-      >
-        <option value="">Todos</option>
-        <option value="gato">Gato</option>
-        <option value="cachorro">Cachorro</option>
-      </select>
+        <select
+          value={species}
+          onChange={(e) => setSpecies(e.target.value)}
+          className="flex-1 h-full bg-transparent outline-none"
+        >
+          <option value="">Todos</option>
+          <option value="gato">Gatos</option>
+          <option value="cachorro">Cachorros</option>
+        </select>
+
+      </div>
     </div>
   );
 }
