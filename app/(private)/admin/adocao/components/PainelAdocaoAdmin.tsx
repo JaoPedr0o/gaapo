@@ -21,50 +21,79 @@ export default function PainelAdocaoAdmin() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="adocao">
-      <div className="relative flex min-h-screen flex-col items-center px-6 py-9">
+      <div className="flex min-h-screen flex-col bg-[#fde5ed] px-6 pt-[34px]">
         <header className="flex flex-col items-center">
-          <h1 className="text-center text-[21px] font-semibold uppercase tracking-[0.4px] text-[#252525]">
+          <h1 className="text-center text-[22px] font-semibold uppercase tracking-[0.4px] text-[#252525]">
             Adicionar ou Editar Abas
           </h1>
 
-          <h2 className="mt-1 text-center text-[21px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[5px]">
+          <h2 className="mt-2 text-center text-[21px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[6px]">
             Página de Adoção
           </h2>
         </header>
 
-        <section className="mt-[156px] flex w-full justify-center">
-          <div className="flex min-h-[119px] w-full max-w-[496px] flex-col items-center rounded-[8px] border border-[#f4a1bd] bg-white px-[30px] pb-[24px] pt-[11px] shadow-[2px_3px_4px_rgba(0,0,0,0.18)]">
-            <h3 className="text-center text-[21px] font-medium text-[#252525]">
-              Selecione a opção desejada
-            </h3>
+        <section className="flex flex-1 items-center justify-center py-10">
+          <div className="w-full max-w-[720px] rounded-[14px] border border-[#f6a6bd] bg-white px-8 py-8 shadow-[4px_5px_0_#f8a2bd]">
+            <div className="mb-7 text-center">
+              <h3 className="text-[24px] font-semibold text-[#252525]">
+                Gerenciar animais para adoção
+              </h3>
 
-            <div className="mt-[20px] grid w-full grid-cols-2 gap-[68px] max-sm:grid-cols-1 max-sm:gap-4">
+              <p className="mx-auto mt-2 max-w-[520px] text-[14px] font-light leading-[1.5] text-[#666]">
+                Escolha uma ação para cadastrar novos animais ou alterar as
+                informações dos animais já cadastrados na página de adoção.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
               <button
                 type="button"
                 onClick={irParaEditarAdocao}
-                className="h-[39px] rounded-[8px] bg-[#f8a2bd] text-[16px] font-bold uppercase text-white shadow-[2px_3px_4px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50"
+                className="group flex min-h-[150px] flex-col items-center justify-center rounded-[12px] border border-[#f6a6bd] bg-[#fff7fa] px-5 py-5 text-center shadow-[2px_3px_6px_rgba(0,0,0,0.10)] transition hover:-translate-y-[2px] hover:bg-white hover:shadow-[3px_5px_12px_rgba(0,0,0,0.15)] focus:outline-none focus:ring-2 focus:ring-[#f6a6bd]/40"
               >
-                Editar
+                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#f8a2bd] text-white shadow-[1px_2px_4px_rgba(0,0,0,0.18)]">
+                  <span className="text-[30px] leading-none">✎</span>
+                </div>
+
+                <span className="text-[18px] font-bold uppercase text-[#252525]">
+                  Editar
+                </span>
+
+                <span className="mt-2 text-[12px] font-light leading-[1.4] text-[#666]">
+                  Visualize, filtre, altere ou remova animais cadastrados.
+                </span>
               </button>
 
               <button
                 type="button"
                 onClick={irParaAdicionarAdocao}
-                className="h-[39px] rounded-[8px] bg-[#f8a2bd] text-[16px] font-bold uppercase text-white shadow-[2px_3px_4px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50"
+                className="group flex min-h-[150px] flex-col items-center justify-center rounded-[12px] border border-[#f6a6bd] bg-[#fff7fa] px-5 py-5 text-center shadow-[2px_3px_6px_rgba(0,0,0,0.10)] transition hover:-translate-y-[2px] hover:bg-white hover:shadow-[3px_5px_12px_rgba(0,0,0,0.15)] focus:outline-none focus:ring-2 focus:ring-[#f6a6bd]/40"
               >
-                Adicionar
+                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#f8a2bd] text-white shadow-[1px_2px_4px_rgba(0,0,0,0.18)]">
+                  <span className="text-[34px] leading-none">+</span>
+                </div>
+
+                <span className="text-[18px] font-bold uppercase text-[#252525]">
+                  Adicionar
+                </span>
+
+                <span className="mt-2 text-[12px] font-light leading-[1.4] text-[#666]">
+                  Cadastre um novo animal com foto, tipo, idade e descrição.
+                </span>
               </button>
             </div>
           </div>
         </section>
 
-        <button
-          type="button"
-          onClick={sairDoPainel}
-          className="absolute bottom-[38px] h-[39px] w-[181px] rounded-[8px] bg-[#f8a2bd] text-[16px] font-bold uppercase text-white shadow-[2px_3px_4px_rgba(0,0,0,0.22)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50"
-        >
-          Sair
-        </button>
+        <div className="mt-auto flex justify-center pb-[34px]">
+          <button
+            type="button"
+            onClick={sairDoPainel}
+            className="h-[38px] w-[170px] rounded-[8px] bg-[#f8a2bd] text-[15px] font-bold uppercase text-white shadow-[2px_3px_6px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50"
+          >
+            Sair
+          </button>
+        </div>
       </div>
     </LayoutPainelAdmin>
   );

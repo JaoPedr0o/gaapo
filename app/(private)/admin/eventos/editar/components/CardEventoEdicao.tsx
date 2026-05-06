@@ -6,13 +6,35 @@ type CardEventoEdicaoProps = {
   evento: DadosEventoAdmin;
 };
 
+function formatarData(data?: string) {
+  if (!data) {
+    return "Não informada";
+  }
+
+  const partes = data.split("-");
+
+  if (partes.length !== 3) {
+    return data;
+  }
+
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+function formatarHorario(horario?: string) {
+  if (!horario) {
+    return "Não informado";
+  }
+
+  return horario;
+}
+
 export default function CardEventoEdicao({ evento }: CardEventoEdicaoProps) {
   return (
     <Link
       href={`/admin/eventos/editar/${evento.id}`}
-      className="relative flex min-h-[72px] w-full items-center rounded-[7px] border border-[#52c4d7] bg-white px-[10px] py-[8px] shadow-[1px_2px_3px_rgba(0,0,0,0.14)] transition hover:scale-[1.003] hover:shadow-[2px_3px_5px_rgba(0,0,0,0.18)]"
+      className="group relative flex min-h-[96px] w-full items-center rounded-[10px] border border-[#52c4d7] bg-white px-[18px] py-[14px] shadow-[2px_3px_6px_rgba(0,0,0,0.10)] transition hover:-translate-y-[1px] hover:shadow-[3px_5px_12px_rgba(0,0,0,0.14)]"
     >
-      <div className="relative h-[43px] w-[62px] shrink-0 overflow-hidden rounded-[4px] bg-[#cfcfcf]">
+      <div className="relative h-[64px] w-[74px] shrink-0 overflow-hidden rounded-[6px] bg-[#d8d8d8]">
         {evento.imagemBase64 && (
           <Image
             src={evento.imagemBase64}
@@ -23,18 +45,31 @@ export default function CardEventoEdicao({ evento }: CardEventoEdicaoProps) {
         )}
       </div>
 
-      <div className="ml-[12px] flex min-w-0 flex-1 flex-col items-center pr-[42px]">
-        <h3 className="text-center text-[14px] font-bold text-[#252525]">
-          {evento.nome || "Nome do Evento"}
+      <div className="ml-[16px] flex min-w-0 flex-1 flex-col justify-center pr-[54px]">
+        <h3 className="text-[18px] font-semibold leading-[1.1] text-[#252525]">
+          {evento.nome || "Nome do evento"}
         </h3>
 
-        <p className="mt-[6px] line-clamp-2 max-w-[330px] text-center text-[9px] font-light leading-[1.25] text-[#9b9b9b]">
-          {evento.descricao ||
-            "Informações informações informações informações informações informações informações informações informações informações"}
+        <p className="mt-[6px] line-clamp-2 text-[12px] font-light leading-[1.35] text-[#7a7a7a]">
+          {evento.descricao || "Sem descrição cadastrada para este evento."}
         </p>
+
+        <div className="mt-[10px] flex flex-wrap gap-[8px]">
+          <span className="rounded-full border border-[#b7edf5] bg-[#f2fdff] px-[10px] py-[4px] text-[11px] font-medium text-[#357b88]">
+            Data: {formatarData(evento.data)}
+          </span>
+
+          <span className="rounded-full border border-[#b7edf5] bg-[#f2fdff] px-[10px] py-[4px] text-[11px] font-medium text-[#357b88]">
+            Horário: {formatarHorario(evento.horario)}
+          </span>
+
+          <span className="rounded-full border border-[#b7edf5] bg-[#f2fdff] px-[10px] py-[4px] text-[11px] font-medium text-[#357b88]">
+            Local: {evento.local || "Não informado"}
+          </span>
+        </div>
       </div>
 
-      <span className="absolute right-[22px] top-1/2 -translate-y-1/2 text-[48px] font-light leading-none text-[#52c4d7]">
+      <span className="absolute right-[20px] top-1/2 -translate-y-1/2 text-[48px] font-light leading-none text-[#52c4d7] transition group-hover:translate-x-[2px]">
         ›
       </span>
     </Link>

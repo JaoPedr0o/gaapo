@@ -107,7 +107,7 @@ export default function FormularioAdicionarEvento() {
     }
 
     return (
-        <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#d9f5fa] px-4 py-8">
+        <main className="flex min-h-screen items-center justify-center  -[#202020] bg-[#d9f5fa] px-4 py-8">
             <section className="w-full max-w-[820px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#52c4d7] lg:w-[58vw] xl:w-[52vw] 2xl:w-[50vw]">
                 <form
                     onSubmit={enviarFormulario}

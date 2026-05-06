@@ -4,6 +4,7 @@ export type DadosAnimalAdocao = {
   descricao: string;
   idade: string;
   sexo: string;
+  especie: string;
   temperamento: string;
   imagemBase64?: string;
   nomeImagem?: string;

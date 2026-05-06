@@ -129,3 +129,35 @@ export async function atualizarEventoAdmin(
         };
     }
 }
+export async function removerEventoAdmin(
+  id: string
+): Promise<RespostaEventoAdmin> {
+  await new Promise((resolve) => setTimeout(resolve, 400));
+
+  const eventosAtuais = buscarEventosLocais();
+
+  const eventoExiste = eventosAtuais.some((evento) => evento.id === id);
+
+  if (!eventoExiste) {
+    return {
+      sucesso: false,
+      mensagem: "Evento não encontrado.",
+    };
+  }
+
+  const eventosAtualizados = eventosAtuais.filter((evento) => evento.id !== id);
+
+  try {
+    salvarEventosLocais(eventosAtualizados);
+
+    return {
+      sucesso: true,
+      mensagem: "Evento removido com sucesso.",
+    };
+  } catch {
+    return {
+      sucesso: false,
+      mensagem: "Não foi possível remover o evento.",
+    };
+  }
+}

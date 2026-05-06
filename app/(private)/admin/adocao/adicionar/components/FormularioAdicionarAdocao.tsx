@@ -10,14 +10,14 @@ import CampoUploadImagemAdocao from "./CampoUploadImagemAdocao";
 import type { DadosAnimalAdocao } from "../../types/animal-adocao";
 
 const opcoesSexoAnimal = [
-    {
-        label: "Macho",
-        valor: "macho",
-    },
-    {
-        label: "Fêmea",
-        valor: "femea",
-    },
+    { label: "Macho", valor: "macho" },
+    { label: "Fêmea", valor: "femea" },
+];
+
+const opcoesEspecieAnimal = [
+    { label: "Cão", valor: "cao" },
+    { label: "Gato", valor: "gato" },
+    { label: "Outros", valor: "outros" },
 ];
 
 export default function FormularioAdicionarAdocao() {
@@ -27,6 +27,7 @@ export default function FormularioAdicionarAdocao() {
     const [descricao, setDescricao] = useState("");
     const [idade, setIdade] = useState("");
     const [sexo, setSexo] = useState("");
+    const [especie, setEspecie] = useState("");
     const [temperamento, setTemperamento] = useState("");
     const [imagemBase64, setImagemBase64] = useState("");
     const [nomeImagem, setNomeImagem] = useState("");
@@ -51,6 +52,10 @@ export default function FormularioAdicionarAdocao() {
             return "Selecione o sexo do animal.";
         }
 
+        if (!especie.trim()) {
+            return "Selecione o tipo do animal.";
+        }
+
         if (!temperamento.trim()) {
             return "Informe o temperamento do animal.";
         }
@@ -63,6 +68,7 @@ export default function FormularioAdicionarAdocao() {
         setDescricao("");
         setIdade("");
         setSexo("");
+        setEspecie("");
         setTemperamento("");
         setImagemBase64("");
         setNomeImagem("");
@@ -90,6 +96,7 @@ export default function FormularioAdicionarAdocao() {
             descricao,
             idade,
             sexo,
+            especie,
             temperamento,
             imagemBase64,
             nomeImagem,
@@ -107,6 +114,10 @@ export default function FormularioAdicionarAdocao() {
 
             setMensagemSucesso("Animal cadastrado com sucesso.");
             limparFormulario();
+
+            setTimeout(() => {
+                router.push("/admin/adocao/editar");
+            }, 600);
         } catch {
             setMensagemErro("Erro ao cadastrar o animal. Tente novamente.");
         } finally {
@@ -116,16 +127,16 @@ export default function FormularioAdicionarAdocao() {
 
     return (
         <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] px-4 py-8">
-            <section className="w-full max-w-[820px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f8a2bd] lg:w-[58vw] xl:w-[52vw] 2xl:w-[50vw]">
+            <section className="w-full max-w-[840px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f8a2bd] lg:w-[58vw] xl:w-[54vw] 2xl:w-[50vw]">
                 <form
                     onSubmit={enviarFormulario}
-                    className="flex min-h-[430px] flex-col rounded-[4px] bg-white"
+                    className="flex min-h-[470px] flex-col rounded-[4px] bg-white"
                 >
                     <h1 className="mb-[18px] ml-[2px] text-[13px] font-medium uppercase tracking-[0.2px] text-[#252525]">
                         Adicionar - Adoção
                     </h1>
 
-                    <div className="flex flex-col gap-[21px]">
+                    <div className="flex flex-col gap-[20px]">
                         <CampoTextoAdocao
                             id="nome"
                             label="Nome do animal"
@@ -142,43 +153,58 @@ export default function FormularioAdicionarAdocao() {
                             onChange={setDescricao}
                         />
 
-                        <div className="flex flex-col gap-[18px]">
-                            <CampoTextoAdocao
-                                id="idade"
-                                label="Idade do animal"
-                                tipo="number"
-                                valor={idade}
-                                placeholder=""
-                                largura="w-[116px] max-sm:w-full"
-                                onChange={setIdade}
-                            />
+                        <div className="grid grid-cols-[140px_1fr] gap-x-[36px] gap-y-[18px] max-md:grid-cols-1">
+                            <div className="flex flex-col gap-[18px]">
+                                <CampoTextoAdocao
+                                    id="idade"
+                                    label="Idade do animal"
+                                    tipo="number"
+                                    valor={idade}
+                                    placeholder=""
+                                    largura="w-full"
+                                    onChange={setIdade}
+                                />
 
-                            <CampoSelectAdocao
-                                id="sexo"
-                                label="Sexo do animal"
-                                valor={sexo}
-                                largura="w-[116px] max-sm:w-full"
-                                opcoes={opcoesSexoAnimal}
-                                onChange={setSexo}
-                            />
-                        </div>
+                                <CampoSelectAdocao
+                                    id="sexo"
+                                    label="Sexo do animal"
+                                    valor={sexo}
+                                    largura="w-full"
+                                    opcoes={opcoesSexoAnimal}
+                                    onChange={setSexo}
+                                />
 
-                        <div className="grid grid-cols-[minmax(260px,350px)_1fr] items-end gap-[110px] max-lg:gap-[60px] max-md:grid-cols-1 max-md:gap-[20px]">
-                            <CampoTextoAdocao
-                                id="temperamento"
-                                label="Temperamento do animal"
-                                valor={temperamento}
-                                placeholder="Insira aqui o temperamento do animal"
-                                onChange={setTemperamento}
-                            />
+                                <CampoSelectAdocao
+                                    id="especie"
+                                    label="Tipo do animal"
+                                    valor={especie}
+                                    largura="w-full"
+                                    opcoes={opcoesEspecieAnimal}
+                                    onChange={setEspecie}
+                                />
+                            </div>
 
-                            <CampoUploadImagemAdocao
-                                nomeImagem={nomeImagem}
-                                onImagemSelecionada={(arquivo, imagem) => {
-                                    setNomeImagem(arquivo.name);
-                                    setImagemBase64(imagem);
-                                }}
-                            />
+                            <div className="flex flex-col justify-end">
+                                <div className="grid grid-cols-[minmax(260px,320px)_1fr] items-end gap-[80px] max-lg:gap-[40px] max-md:grid-cols-1 max-md:gap-[20px]">
+                                    <CampoTextoAdocao
+                                        id="temperamento"
+                                        label="Temperamento do animal"
+                                        valor={temperamento}
+                                        placeholder="Insira aqui o temperamento do animal"
+                                        onChange={setTemperamento}
+                                    />
+
+                                    <div className="flex items-end">
+                                        <CampoUploadImagemAdocao
+                                            nomeImagem={nomeImagem}
+                                            onImagemSelecionada={(arquivo, imagem) => {
+                                                setNomeImagem(arquivo.name);
+                                                setImagemBase64(imagem);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

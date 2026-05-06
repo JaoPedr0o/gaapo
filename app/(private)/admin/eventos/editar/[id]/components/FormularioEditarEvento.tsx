@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   atualizarEventoAdmin,
   buscarEventoAdminPorId,
+  removerEventoAdmin,
 } from "../../../services/eventos-admin-service";
 import type { DadosEventoAdmin } from "../../../types/evento-admin";
 import CampoAreaTextoEvento from "../../../adicionar/components/CampoAreaTextoEvento";
@@ -31,6 +32,7 @@ export default function FormularioEditarEvento({
   const [mensagemSucesso, setMensagemSucesso] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [carregandoEvento, setCarregandoEvento] = useState(true);
+  const [modalRemocaoAberta, setModalRemocaoAberta] = useState(false);
 
   useEffect(() => {
     async function carregarEvento() {
@@ -49,7 +51,6 @@ export default function FormularioEditarEvento({
       setLocal(resposta.evento.local);
       setImagemBase64(resposta.evento.imagemBase64 ?? "");
       setNomeImagem(resposta.evento.nomeImagem ?? "");
-
       setCarregandoEvento(false);
     }
 
@@ -82,6 +83,33 @@ export default function FormularioEditarEvento({
 
   function cancelarEdicao() {
     router.push("/admin/eventos/editar");
+  }
+
+  async function confirmarRemocaoEvento() {
+    setMensagemErro("");
+    setMensagemSucesso("");
+
+    try {
+      setCarregando(true);
+
+      const resposta = await removerEventoAdmin(idEvento);
+
+      if (!resposta.sucesso) {
+        setMensagemErro(resposta.mensagem ?? "Não foi possível remover.");
+        return;
+      }
+
+      setMensagemSucesso("Evento removido com sucesso.");
+      setModalRemocaoAberta(false);
+
+      setTimeout(() => {
+        router.push("/admin/eventos/editar");
+      }, 500);
+    } catch {
+      setMensagemErro("Erro ao remover o evento. Tente novamente.");
+    } finally {
+      setCarregando(false);
+    }
   }
 
   async function enviarFormulario(event: FormEvent<HTMLFormElement>) {
@@ -119,6 +147,10 @@ export default function FormularioEditarEvento({
       }
 
       setMensagemSucesso("Evento atualizado com sucesso.");
+
+      setTimeout(() => {
+        router.push("/admin/eventos/editar");
+      }, 600);
     } catch {
       setMensagemErro("Erro ao atualizar o evento. Tente novamente.");
     } finally {
@@ -128,7 +160,7 @@ export default function FormularioEditarEvento({
 
   if (carregandoEvento) {
     return (
-      <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#d9f5fa] px-4 py-8">
+      <main className="flex min-h-screen items-center justify-center  -[#202020] bg-[#d9f5fa] px-4 py-8">
         <div className="rounded-[8px] bg-white px-8 py-6 text-[14px] text-[#252525] shadow-[6px_6px_0_#52c4d7]">
           Carregando evento...
         </div>
@@ -137,7 +169,7 @@ export default function FormularioEditarEvento({
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#d9f5fa] px-4 py-8">
+    <main className="relative flex min-h-screen items-center justify-center  -[#202020] bg-[#d9f5fa] px-4 py-8">
       <section className="w-full max-w-[820px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#52c4d7] lg:w-[58vw] xl:w-[52vw] 2xl:w-[50vw]">
         <form
           onSubmit={enviarFormulario}
@@ -207,33 +239,77 @@ export default function FormularioEditarEvento({
 
           {(mensagemErro || mensagemSucesso) && (
             <p
-              className={`mt-4 text-center text-[13px] font-medium ${
-                mensagemErro ? "text-red-600" : "text-green-600"
-              }`}
+              className={`mt-4 text-center text-[13px] font-medium ${mensagemErro ? "text-red-600" : "text-green-600"
+                }`}
             >
               {mensagemErro || mensagemSucesso}
             </p>
           )}
 
-          <div className="mt-auto flex justify-end gap-[12px] pt-[22px] max-sm:flex-col">
+          <div className="mt-auto flex justify-between gap-[12px] pt-[22px] max-sm:flex-col">
             <button
               type="button"
-              onClick={cancelarEdicao}
-              className="h-[34px] w-[150px] rounded-[7px] bg-[#52c4d7] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#40b8cc] focus:outline-none focus:ring-2 focus:ring-[#52c4d7]/50 max-sm:w-full"
+              onClick={() => setModalRemocaoAberta(true)}
+              disabled={carregando}
+              className="h-[34px] w-[150px] rounded-[7px] border border-[#52c4d7] bg-white text-[15px] font-bold uppercase text-[#52c4d7] shadow-[1px_2px_3px_rgba(0,0,0,0.16)] transition hover:bg-[#eefcff] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#52c4d7]/50 max-sm:w-full"
             >
-              Cancelar
+              Remover
             </button>
 
-            <button
-              type="submit"
-              disabled={carregando}
-              className="h-[34px] w-[150px] rounded-[7px] bg-[#52c4d7] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#40b8cc] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#52c4d7]/50 max-sm:w-full"
-            >
-              {carregando ? "Salvando..." : "Salvar"}
-            </button>
+            <div className="flex justify-end gap-[12px] max-sm:flex-col">
+              <button
+                type="button"
+                onClick={cancelarEdicao}
+                className="h-[34px] w-[150px] rounded-[7px] bg-[#52c4d7] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#40b8cc] focus:outline-none focus:ring-2 focus:ring-[#52c4d7]/50 max-sm:w-full"
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="submit"
+                disabled={carregando}
+                className="h-[34px] w-[150px] rounded-[7px] bg-[#52c4d7] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#40b8cc] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#52c4d7]/50 max-sm:w-full"
+              >
+                {carregando ? "Salvando..." : "Salvar"}
+              </button>
+            </div>
           </div>
         </form>
       </section>
+
+      {modalRemocaoAberta && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 px-4">
+          <div className="w-full max-w-[410px] rounded-[10px] border border-[#52c4d7] bg-white px-6 py-6 shadow-[4px_5px_10px_rgba(0,0,0,0.25)]">
+            <h2 className="text-center text-[20px] font-bold uppercase text-[#252525]">
+              Remover evento
+            </h2>
+
+            <p className="mt-4 text-center text-[14px] font-light leading-[1.5] text-[#252525]">
+              Tem certeza que deseja remover este evento da página de eventos?
+            </p>
+
+            <div className="mt-6 flex justify-center gap-3 max-sm:flex-col">
+              <button
+                type="button"
+                onClick={() => setModalRemocaoAberta(false)}
+                disabled={carregando}
+                className="h-[34px] w-[140px] rounded-[7px] border border-[#52c4d7] bg-white text-[14px] font-bold uppercase text-[#52c4d7] shadow-[1px_2px_3px_rgba(0,0,0,0.14)] transition hover:bg-[#eefcff] disabled:opacity-70 max-sm:w-full"
+              >
+                Voltar
+              </button>
+
+              <button
+                type="button"
+                onClick={confirmarRemocaoEvento}
+                disabled={carregando}
+                className="h-[34px] w-[140px] rounded-[7px] bg-[#52c4d7] text-[14px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#40b8cc] disabled:cursor-not-allowed disabled:opacity-70 max-sm:w-full"
+              >
+                {carregando ? "Removendo..." : "Confirmar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

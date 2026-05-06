@@ -212,3 +212,35 @@ export async function atualizarAnimalAdocao(
 
   return conteudo;
 }
+export async function removerAnimalAdocao(
+  id: string
+): Promise<RespostaCadastroAnimal> {
+  await new Promise((resolve) => setTimeout(resolve, 400));
+
+  const animaisAtuais = buscarAnimaisLocais();
+
+  const animalExiste = animaisAtuais.some((animal) => animal.id === id);
+
+  if (!animalExiste) {
+    return {
+      sucesso: false,
+      mensagem: "Animal não encontrado.",
+    };
+  }
+
+  const animaisAtualizados = animaisAtuais.filter((animal) => animal.id !== id);
+
+  try {
+    salvarAnimaisLocais(animaisAtualizados);
+
+    return {
+      sucesso: true,
+      mensagem: "Animal removido com sucesso.",
+    };
+  } catch {
+    return {
+      sucesso: false,
+      mensagem: "Não foi possível remover o animal.",
+    };
+  }
+}

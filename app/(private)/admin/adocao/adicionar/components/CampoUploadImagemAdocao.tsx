@@ -118,9 +118,9 @@ export default function CampoUploadImagemAdocao({
 
       <label
         htmlFor="imagem-animal"
-        className="flex h-[22px] w-full max-w-[135px] cursor-pointer items-center justify-center rounded-full border border-[#f6a6bd] bg-white px-2 text-[10px] font-light text-[#777] shadow-[1px_2px_3px_rgba(0,0,0,0.12)] transition hover:bg-[#fff4f7]"
+        className="flex h-[30px] w-full max-w-[170px] cursor-pointer items-center justify-center rounded-full border border-[#f6a6bd] bg-white px-3 text-[11px] font-light text-[#777] shadow-[1px_2px_3px_rgba(0,0,0,0.12)] transition hover:bg-[#fff4f7]"
       >
-        {nomeImagem ? "Alterar imagem" : ""}
+        {nomeImagem ? "Alterar imagem" : "Selecionar imagem"}
       </label>
 
       {nomeImagem && (
