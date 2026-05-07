@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import LayoutPainelAdmin from "../../components/LayoutPainelAdmin";
+import CabecalhoAdmin from "../../components/CabecalhoAdmin";
 
 export default function PainelEventosAdmin() {
   const router = useRouter();
@@ -21,16 +22,12 @@ export default function PainelEventosAdmin() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="eventos">
-      <div className="flex min-h-screen flex-col bg-[#d9f5fa] px-6 pt-[34px]">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[22px] font-semibold uppercase tracking-[0.4px] text-[#252525]">
-            Adicionar ou Editar Abas
-          </h1>
-
-          <h2 className="mt-2 text-center text-[21px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[6px]">
-            Página de Eventos
-          </h2>
-        </header>
+      <div className="flex min-h-screen flex-col bg-[#d9f5fa] bg-[url('/admin-forminhas-preto-transparente.svg')] bg-cover bg-center bg-no-repeat px-6 pt-[34px]">
+        <CabecalhoAdmin
+          titulo="Adicionar ou Editar Abas"
+          subtitulo="Página de Eventos"
+          corTema="#52c4d7"
+        />
 
         <section className="flex flex-1 items-center justify-center py-10">
           <div className="w-full max-w-[720px] rounded-[14px] border border-[#52c4d7] bg-white px-8 py-8 shadow-[4px_5px_0_#52c4d7]">

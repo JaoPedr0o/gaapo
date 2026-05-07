@@ -6,6 +6,7 @@ import LayoutPainelAdmin from "../../../components/LayoutPainelAdmin";
 import { listarAnimaisAdocao } from "../../services/adocao-admin-service";
 import type { DadosAnimalAdocao } from "../../types/animal-adocao";
 import CardAnimalEdicao from "./CardAnimalEdicao";
+import CabecalhoAdmin from "../../../components/CabecalhoAdmin";
 
 export default function ListagemEditarAdocao() {
   const [animais, setAnimais] = useState<DadosAnimalAdocao[]>([]);
@@ -59,16 +60,12 @@ export default function ListagemEditarAdocao() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="adocao">
-      <div className="flex min-h-screen flex-col bg-[#fde5ed] px-6 pt-[18px]">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[15px] font-semibold uppercase tracking-[0.2px] text-[#252525]">
-            Editar Abas
-          </h1>
-
-          <h2 className="mt-[4px] text-center text-[15px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[4px]">
-            Página de Adoção
-          </h2>
-        </header>
+      <div className="flex min-h-screen flex-col bg-[#fde5ed] fundo-forminhas-admin px-6 pt-[18px]">
+        <CabecalhoAdmin
+          titulo="Editar Abas"
+          subtitulo="Página de Adoção"
+          corTema="#f8a2bd"
+        />
 
         <section className="mx-auto mt-[20px] flex w-full max-w-[900px] flex-1 flex-col">
           <div className="mb-[14px] rounded-[10px] border border-[#f6a6bd] bg-white px-4 py-4 shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">

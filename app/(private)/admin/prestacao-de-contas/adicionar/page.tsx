@@ -1,5 +1,5 @@
-import FormularioAdicionarPrestacaoContas from "./components/FormularioAdicionarPrestacaoContas";
+import EscolhaTipoPrestacaoContas from "./components/EscolhaTipoPrestacaoContas";
 
 export default function AdicionarPrestacaoContasPage() {
-  return <FormularioAdicionarPrestacaoContas />;
+  return <EscolhaTipoPrestacaoContas />;
 }

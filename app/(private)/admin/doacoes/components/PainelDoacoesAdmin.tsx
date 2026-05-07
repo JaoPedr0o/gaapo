@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import LayoutPainelAdmin from "../../components/LayoutPainelAdmin";
 import { buscarDadosDoacoesAdmin } from "../services/doacoes-admin-service";
 import type { DadosDoacoesAdmin } from "../types/doacoes-admin";
+import CabecalhoAdmin from "../../components/CabecalhoAdmin";
 
 export default function PainelDoacoesAdmin() {
   const router = useRouter();
@@ -38,16 +39,12 @@ export default function PainelDoacoesAdmin() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="doacoes">
-      <div className="flex min-h-screen flex-col bg-[#fff5cf] px-6 pt-[28px]">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[22px] font-semibold uppercase tracking-[0.3px] text-[#252525]">
-            Editar Aba
-          </h1>
-
-          <h2 className="mt-[6px] text-center text-[21px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[6px]">
-            Página de Doações
-          </h2>
-        </header>
+      <div className="flex min-h-screen flex-col bg-[#fff5cf] bg-[url('/admin-forminhas-preto-transparente.svg')] bg-cover bg-center bg-no-repeat px-6 pt-[28px]">
+        <CabecalhoAdmin
+          titulo="Editar Aba"
+          subtitulo="Página de Doações"
+          corTema="#f5bd00"
+        />
 
         <section className="flex flex-1 items-center justify-center py-10">
           <div className="relative w-full max-w-[780px] rounded-[14px] border border-[#f5bd00] bg-white px-8 py-8 shadow-[4px_5px_0_#f5bd00] max-md:px-5">

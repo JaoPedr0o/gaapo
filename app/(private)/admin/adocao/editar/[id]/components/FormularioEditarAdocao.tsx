@@ -179,7 +179,7 @@ export default function FormularioEditarAdocao({
 
   if (carregandoAnimal) {
     return (
-      <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] px-4 py-8">
+      <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] fundo-forminhas-admin px-4 py-8">
         <div className="rounded-[8px] bg-white px-8 py-6 text-[14px] text-[#252525] shadow-[6px_6px_0_#f8a2bd]">
           Carregando animal...
         </div>
@@ -188,127 +188,126 @@ export default function FormularioEditarAdocao({
   }
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] px-4 py-8">
-      <section className="w-full max-w-[840px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f8a2bd] lg:w-[58vw] xl:w-[54vw] 2xl:w-[50vw]">
-        <form
-          onSubmit={enviarFormulario}
-          className="flex min-h-[470px] flex-col rounded-[4px] bg-white"
-        >
-          <h1 className="mb-[18px] ml-[2px] text-[13px] font-medium uppercase tracking-[0.2px] text-[#252525]">
-            Editar - Adoção
-          </h1>
+    <main className="relative flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] fundo-forminhas-admin px-4 py-8">      <section className="w-full max-w-[840px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f8a2bd] lg:w-[58vw] xl:w-[54vw] 2xl:w-[50vw]">
+      <form
+        onSubmit={enviarFormulario}
+        className="flex min-h-[470px] flex-col rounded-[4px] bg-white"
+      >
+        <h1 className="mb-[18px] ml-[2px] text-[13px] font-medium uppercase tracking-[0.2px] text-[#252525]">
+          Editar - Adoção
+        </h1>
 
-          <div className="flex flex-col gap-[20px]">
-            <CampoTextoAdocao
-              id="nome"
-              label="Nome do animal"
-              valor={nome}
-              placeholder="Edite aqui o nome do animal"
-              onChange={setNome}
-            />
+        <div className="flex flex-col gap-[20px]">
+          <CampoTextoAdocao
+            id="nome"
+            label="Nome do animal"
+            valor={nome}
+            placeholder="Edite aqui o nome do animal"
+            onChange={setNome}
+          />
 
-            <CampoAreaTextoAdocao
-              id="descricao"
-              label="Sobre o animal"
-              valor={descricao}
-              placeholder="Edite aqui o texto sobre o animal"
-              onChange={setDescricao}
-            />
+          <CampoAreaTextoAdocao
+            id="descricao"
+            label="Sobre o animal"
+            valor={descricao}
+            placeholder="Edite aqui o texto sobre o animal"
+            onChange={setDescricao}
+          />
 
-            <div className="grid grid-cols-[140px_1fr] gap-x-[36px] gap-y-[18px] max-md:grid-cols-1">
-              <div className="flex flex-col gap-[18px]">
+          <div className="grid grid-cols-[140px_1fr] gap-x-[36px] gap-y-[18px] max-md:grid-cols-1">
+            <div className="flex flex-col gap-[18px]">
+              <CampoTextoAdocao
+                id="idade"
+                label="Idade do animal"
+                tipo="number"
+                valor={idade}
+                placeholder=""
+                largura="w-full"
+                onChange={setIdade}
+              />
+
+              <CampoSelectAdocao
+                id="sexo"
+                label="Sexo do animal"
+                valor={sexo}
+                largura="w-full"
+                opcoes={opcoesSexoAnimal}
+                onChange={setSexo}
+              />
+
+              <CampoSelectAdocao
+                id="especie"
+                label="Tipo do animal"
+                valor={especie}
+                largura="w-full"
+                opcoes={opcoesEspecieAnimal}
+                onChange={setEspecie}
+              />
+            </div>
+
+            <div className="flex flex-col justify-end">
+              <div className="grid grid-cols-[minmax(260px,320px)_1fr] items-end gap-[80px] max-lg:gap-[40px] max-md:grid-cols-1 max-md:gap-[20px]">
                 <CampoTextoAdocao
-                  id="idade"
-                  label="Idade do animal"
-                  tipo="number"
-                  valor={idade}
-                  placeholder=""
-                  largura="w-full"
-                  onChange={setIdade}
+                  id="temperamento"
+                  label="Temperamento do animal"
+                  valor={temperamento}
+                  placeholder="Edite aqui o temperamento do animal"
+                  onChange={setTemperamento}
                 />
 
-                <CampoSelectAdocao
-                  id="sexo"
-                  label="Sexo do animal"
-                  valor={sexo}
-                  largura="w-full"
-                  opcoes={opcoesSexoAnimal}
-                  onChange={setSexo}
-                />
-
-                <CampoSelectAdocao
-                  id="especie"
-                  label="Tipo do animal"
-                  valor={especie}
-                  largura="w-full"
-                  opcoes={opcoesEspecieAnimal}
-                  onChange={setEspecie}
-                />
-              </div>
-
-              <div className="flex flex-col justify-end">
-                <div className="grid grid-cols-[minmax(260px,320px)_1fr] items-end gap-[80px] max-lg:gap-[40px] max-md:grid-cols-1 max-md:gap-[20px]">
-                  <CampoTextoAdocao
-                    id="temperamento"
-                    label="Temperamento do animal"
-                    valor={temperamento}
-                    placeholder="Edite aqui o temperamento do animal"
-                    onChange={setTemperamento}
+                <div className="flex items-end">
+                  <CampoUploadImagemAdocao
+                    nomeImagem={nomeImagem}
+                    onImagemSelecionada={(arquivo, imagem) => {
+                      setNomeImagem(arquivo.name);
+                      setImagemBase64(imagem);
+                    }}
                   />
-
-                  <div className="flex items-end">
-                    <CampoUploadImagemAdocao
-                      nomeImagem={nomeImagem}
-                      onImagemSelecionada={(arquivo, imagem) => {
-                        setNomeImagem(arquivo.name);
-                        setImagemBase64(imagem);
-                      }}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {(mensagemErro || mensagemSucesso) && (
-            <p
-              className={`mt-4 text-center text-[13px] font-medium ${mensagemErro ? "text-red-600" : "text-green-600"
-                }`}
-            >
-              {mensagemErro || mensagemSucesso}
-            </p>
-          )}
+        {(mensagemErro || mensagemSucesso) && (
+          <p
+            className={`mt-4 text-center text-[13px] font-medium ${mensagemErro ? "text-red-600" : "text-green-600"
+              }`}
+          >
+            {mensagemErro || mensagemSucesso}
+          </p>
+        )}
 
-          <div className="mt-auto flex justify-between gap-[12px] pt-[22px] max-sm:flex-col">
+        <div className="mt-auto flex justify-between gap-[12px] pt-[22px] max-sm:flex-col">
+          <button
+            type="button"
+            onClick={() => setModalRemocaoAberta(true)}
+            disabled={carregando}
+            className="h-[34px] w-[150px] rounded-[7px] border border-[#f8a2bd] bg-white text-[15px] font-bold uppercase text-[#f8a2bd] shadow-[1px_2px_3px_rgba(0,0,0,0.16)] transition hover:bg-[#fff4f8] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
+          >
+            Remover
+          </button>
+
+          <div className="flex justify-end gap-[12px] max-sm:flex-col">
             <button
               type="button"
-              onClick={() => setModalRemocaoAberta(true)}
-              disabled={carregando}
-              className="h-[34px] w-[150px] rounded-[7px] border border-[#f8a2bd] bg-white text-[15px] font-bold uppercase text-[#f8a2bd] shadow-[1px_2px_3px_rgba(0,0,0,0.16)] transition hover:bg-[#fff4f8] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
+              onClick={cancelarEdicao}
+              className="h-[34px] w-[150px] rounded-[7px] bg-[#f8a2bd] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
             >
-              Remover
+              Cancelar
             </button>
 
-            <div className="flex justify-end gap-[12px] max-sm:flex-col">
-              <button
-                type="button"
-                onClick={cancelarEdicao}
-                className="h-[34px] w-[150px] rounded-[7px] bg-[#f8a2bd] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
-              >
-                Cancelar
-              </button>
-
-              <button
-                type="submit"
-                disabled={carregando}
-                className="h-[34px] w-[150px] rounded-[7px] bg-[#f8a2bd] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
-              >
-                {carregando ? "Salvando..." : "Salvar"}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={carregando}
+              className="h-[34px] w-[150px] rounded-[7px] bg-[#f8a2bd] text-[15px] font-bold uppercase text-white shadow-[1px_2px_3px_rgba(0,0,0,0.20)] transition hover:bg-[#f58dac] disabled:cursor-not-allowed disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-[#f8a2bd]/50 max-sm:w-full"
+            >
+              {carregando ? "Salvando..." : "Salvar"}
+            </button>
           </div>
-        </form>
-      </section>
+        </div>
+      </form>
+    </section>
 
       {modalRemocaoAberta && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 px-4">

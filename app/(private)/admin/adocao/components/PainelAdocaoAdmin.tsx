@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import LayoutPainelAdmin from "../../components/LayoutPainelAdmin";
+import CabecalhoAdmin from "../../components/CabecalhoAdmin";
 
 export default function PainelAdocaoAdmin() {
   const router = useRouter();
@@ -21,17 +22,12 @@ export default function PainelAdocaoAdmin() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="adocao">
-      <div className="flex min-h-screen flex-col bg-[#fde5ed] px-6 pt-[34px]">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[22px] font-semibold uppercase tracking-[0.4px] text-[#252525]">
-            Adicionar ou Editar Abas
-          </h1>
-
-          <h2 className="mt-2 text-center text-[21px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[6px]">
-            Página de Adoção
-          </h2>
-        </header>
-
+      <div className="flex min-h-screen flex-col bg-[#fde5ed] bg-[url('/admin-forminhas-preto-transparente.svg')] bg-cover bg-center bg-no-repeat px-6 pt-[34px]">
+        <CabecalhoAdmin
+          titulo="Adicionar ou Editar Abas"
+          subtitulo="Página de Adoção"
+          corTema="#f8a2bd"
+        />
         <section className="flex flex-1 items-center justify-center py-10">
           <div className="w-full max-w-[720px] rounded-[14px] border border-[#f6a6bd] bg-white px-8 py-8 shadow-[4px_5px_0_#f8a2bd]">
             <div className="mb-7 text-center">

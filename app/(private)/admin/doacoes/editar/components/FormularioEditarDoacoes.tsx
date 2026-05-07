@@ -97,7 +97,7 @@ export default function FormularioEditarDoacoes() {
 
   if (carregandoDados) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#fff5cf] px-4 py-8">
+      <main className="flex min-h-screen items-center justify-center bg-[#fff5cf] fundo-forminhas-admin px-4 py-8">
         <div className="rounded-[8px] bg-white px-8 py-6 text-[14px] text-[#252525] shadow-[6px_6px_0_#f5bd00]">
           Carregando informações...
         </div>
@@ -106,7 +106,7 @@ export default function FormularioEditarDoacoes() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#fff5cf] px-4 py-8">
+    <main className="flex min-h-screen items-center justify-center bg-[#fff5cf] fundo-forminhas-admin px-4 py-8">
       <section className="w-full max-w-[920px] rounded-[6px] bg-white px-[14px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f5bd00] lg:w-[62vw] xl:w-[56vw] 2xl:w-[52vw]">
         <form
           onSubmit={enviarFormulario}

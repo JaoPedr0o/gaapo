@@ -6,6 +6,7 @@ import LayoutPainelAdmin from "../../../components/LayoutPainelAdmin";
 import { listarEventosAdmin } from "../../services/eventos-admin-service";
 import type { DadosEventoAdmin } from "../../types/evento-admin";
 import CardEventoEdicao from "./CardEventoEdicao";
+import CabecalhoAdmin from "../../../components/CabecalhoAdmin";
 
 export default function ListagemEditarEventos() {
   const [eventos, setEventos] = useState<DadosEventoAdmin[]>([]);
@@ -59,16 +60,12 @@ export default function ListagemEditarEventos() {
 
   return (
     <LayoutPainelAdmin paginaAtiva="eventos">
-      <div className="flex min-h-screen flex-col bg-[#d9f5fa] px-6 pt-[18px]">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[15px] font-semibold uppercase tracking-[0.2px] text-[#252525]">
-            Editar Abas
-          </h1>
-
-          <h2 className="mt-[4px] text-center text-[15px] font-medium uppercase tracking-[0.2px] text-[#252525] underline underline-offset-[4px]">
-            Página de Eventos
-          </h2>
-        </header>
+      <div className="flex min-h-screen flex-col bg-[#d9f5fa] fundo-forminhas-admin px-6 pt-[18px]">
+        <CabecalhoAdmin
+          titulo="Editar Abas"
+          subtitulo="Página de Eventos"
+          corTema="#52c4d7"
+        />
 
         <section className="mx-auto mt-[20px] flex w-full max-w-[900px] flex-1 flex-col">
           <div className="mb-[14px] rounded-[10px] border border-[#52c4d7] bg-white px-4 py-4 shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">

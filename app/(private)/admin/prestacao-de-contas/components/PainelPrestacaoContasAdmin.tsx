@@ -1,132 +1,216 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import LayoutPainelAdmin from "../../components/LayoutPainelAdmin";
-import { buscarPrestacaoContasAdmin } from "../services/prestacao-contas-admin-service";
+import CabecalhoAdmin from "../../components/CabecalhoAdmin";
+import { listarPrestacoesContasAdmin } from "../services/prestacao-contas-admin-service";
 import type { DadosPrestacaoContasAdmin } from "../types/prestacao-contas-admin";
+import CardPrestacaoContasAdmin from "./CardPrestacaoContasAdmin";
 
 export default function PainelPrestacaoContasAdmin() {
   const router = useRouter();
 
-  const [documento, setDocumento] =
-    useState<DadosPrestacaoContasAdmin | null>(null);
+  const [prestacoes, setPrestacoes] = useState<DadosPrestacaoContasAdmin[]>([]);
   const [carregando, setCarregando] = useState(true);
-  const [mensagemErro, setMensagemErro] = useState("");
+  const [buscaTitulo, setBuscaTitulo] = useState("");
+  const [filtroMes, setFiltroMes] = useState("");
+  const [filtroAno, setFiltroAno] = useState("");
 
   useEffect(() => {
-    async function carregarDocumento() {
-      const resposta = await buscarPrestacaoContasAdmin();
+    async function carregarPrestacoes() {
+      const resposta = await listarPrestacoesContasAdmin();
 
-      if (resposta.sucesso && resposta.documento) {
-        setDocumento(resposta.documento);
+      if (resposta.sucesso) {
+        setPrestacoes(resposta.prestacoes);
+      } else {
+        setPrestacoes([]);
       }
 
       setCarregando(false);
     }
 
-    carregarDocumento();
+    carregarPrestacoes();
   }, []);
 
-  function irParaAdicionarPrestacaoContas() {
-    router.push("/admin/prestacao-de-contas/adicionar");
-  }
+  const prestacoesFiltradas = useMemo(() => {
+    return prestacoes.filter((prestacao) => {
+      const tituloConfere = prestacao.titulo
+        .toLowerCase()
+        .includes(buscaTitulo.toLowerCase().trim());
+
+      const mesConfere = filtroMes
+        ? prestacao.mesReferencia === filtroMes
+        : true;
+
+      const anoConfere = filtroAno
+        ? prestacao.anoReferencia === filtroAno
+        : true;
+
+      return tituloConfere && mesConfere && anoConfere;
+    });
+  }, [prestacoes, buscaTitulo, filtroMes, filtroAno]);
 
   function sairDoPainel() {
     localStorage.removeItem("gaapo_admin_token");
     router.push("/admin");
   }
 
-  function baixarDocumento() {
-    setMensagemErro("");
-
-    if (!documento?.documentoBase64) {
-      setMensagemErro("Nenhum relatório foi anexado ainda.");
-      return;
-    }
-
-    const linkDownload = document.createElement("a");
-
-    linkDownload.href = documento.documentoBase64;
-    linkDownload.download = documento.nomeDocumento || "relatorio-mensal.pdf";
-    document.body.appendChild(linkDownload);
-    linkDownload.click();
-    document.body.removeChild(linkDownload);
+  function limparFiltros() {
+    setBuscaTitulo("");
+    setFiltroMes("");
+    setFiltroAno("");
   }
 
   return (
     <LayoutPainelAdmin paginaAtiva="prestacao-contas">
-      <div className="relative flex min-h-screen flex-col items-center bg-[#fceefd] px-4 py-[28px] md:px-6">
-        <header className="flex flex-col items-center">
-          <h1 className="text-center text-[20px] font-semibold uppercase tracking-[0.3px] text-[#252525]">
-            Adicionar Aba
-          </h1>
+      <div className="flex min-h-screen flex-col bg-[#fceefd] fundo-forminhas-admin px-6 pt-[18px]">
+        <CabecalhoAdmin
+          titulo="Prestação de Contas"
+          subtitulo="Histórico de Relatórios"
+          corTema="#b75fc1"
+        />
 
-          <h2 className="mt-[4px] max-w-[330px] text-center text-[20px] font-medium uppercase leading-[1.3] tracking-[0.2px] text-[#252525] underline underline-offset-[5px]">
-            Página de Prestação de Contas
-          </h2>
-        </header>
+        <section className="mx-auto mt-[22px] flex w-full max-w-[950px] flex-1 flex-col">
+          <div className="mb-[14px] rounded-[10px] border border-[#b75fc1] bg-white px-4 py-4 shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">
+            <div className="grid grid-cols-[1fr_150px_140px_120px] gap-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
+              <div className="relative">
+                <label
+                  htmlFor="buscaTitulo"
+                  className="absolute -top-[9px] left-[12px] bg-white px-2 text-[11px] font-light text-[#252525]"
+                >
+                  Buscar por título
+                </label>
 
-        <section className="mt-[95px] flex w-full justify-center">
-          <div className="relative flex min-h-[174px] w-full max-w-[676px] flex-col items-center justify-center rounded-[7px] border border-[#b75fc1] bg-white px-6 py-8 shadow-[1px_2px_3px_rgba(0,0,0,0.16)] md:px-8">
-            <h3 className="text-center text-[32px] font-bold uppercase leading-none tracking-[0.4px] text-[#b75fc1] md:text-[36px]">
-              {documento?.titulo || "Relatório Mensal"}
-            </h3>
-
-            <button
-              type="button"
-              onClick={baixarDocumento}
-              className="mt-[28px] flex h-[48px] w-full max-w-[296px] items-center rounded-[7px] border-2 border-[#f5bd00] bg-white px-[10px] transition hover:bg-[#fff9e8] focus:outline-none focus:ring-2 focus:ring-[#f5bd00]/40"
-            >
-              <div className="relative mr-[38px] h-[29px] w-[24px] shrink-0 text-[#b75fc1]">
-                <div className="absolute left-0 top-0 h-[29px] w-[22px] rounded-[1px] border-2 border-[#b75fc1]" />
-                <div className="absolute right-0 top-0 h-0 w-0 border-l-[8px] border-t-[8px] border-l-transparent border-t-[#b75fc1]" />
-                <div className="absolute left-[5px] top-[9px] h-[2px] w-[10px] bg-[#b75fc1]" />
-                <div className="absolute left-[5px] top-[15px] h-[2px] w-[12px] bg-[#b75fc1]" />
-                <div className="absolute left-[5px] top-[21px] h-[2px] w-[12px] bg-[#b75fc1]" />
+                <input
+                  id="buscaTitulo"
+                  type="text"
+                  value={buscaTitulo}
+                  placeholder="Digite o título do relatório"
+                  onChange={(event) => setBuscaTitulo(event.target.value)}
+                  className="h-[40px] w-full rounded-[8px] border border-[#b75fc1] bg-white px-3 text-[13px] font-light text-[#252525] shadow-[1px_2px_3px_rgba(0,0,0,0.10)] outline-none placeholder:text-[#9d9d9d] focus:border-[#a94fb4] focus:ring-2 focus:ring-[#b75fc1]/30"
+                />
               </div>
 
-              <span className="text-[19px] font-medium uppercase tracking-[0.1px] text-[#252525]">
-                PDF Relatório
-              </span>
-            </button>
+              <div className="relative">
+                <label
+                  htmlFor="filtroMes"
+                  className="absolute -top-[9px] left-[12px] bg-white px-2 text-[11px] font-light text-[#252525]"
+                >
+                  Mês
+                </label>
 
+                <select
+                  id="filtroMes"
+                  value={filtroMes}
+                  onChange={(event) => setFiltroMes(event.target.value)}
+                  className="h-[40px] w-full rounded-[8px] border border-[#b75fc1] bg-white px-3 text-[13px] font-light text-[#252525] shadow-[1px_2px_3px_rgba(0,0,0,0.10)] outline-none focus:border-[#a94fb4] focus:ring-2 focus:ring-[#b75fc1]/30"
+                >
+                  <option value="">Todos</option>
+                  <option value="01">Janeiro</option>
+                  <option value="02">Fevereiro</option>
+                  <option value="03">Março</option>
+                  <option value="04">Abril</option>
+                  <option value="05">Maio</option>
+                  <option value="06">Junho</option>
+                  <option value="07">Julho</option>
+                  <option value="08">Agosto</option>
+                  <option value="09">Setembro</option>
+                  <option value="10">Outubro</option>
+                  <option value="11">Novembro</option>
+                  <option value="12">Dezembro</option>
+                </select>
+              </div>
+
+              <div className="relative">
+                <label
+                  htmlFor="filtroAno"
+                  className="absolute -top-[9px] left-[12px] bg-white px-2 text-[11px] font-light text-[#252525]"
+                >
+                  Ano
+                </label>
+
+                <input
+                  id="filtroAno"
+                  type="number"
+                  value={filtroAno}
+                  placeholder="2026"
+                  onChange={(event) => setFiltroAno(event.target.value)}
+                  className="h-[40px] w-full rounded-[8px] border border-[#b75fc1] bg-white px-3 text-[13px] font-light text-[#252525] shadow-[1px_2px_3px_rgba(0,0,0,0.10)] outline-none placeholder:text-[#9d9d9d] focus:border-[#a94fb4] focus:ring-2 focus:ring-[#b75fc1]/30"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={limparFiltros}
+                className="h-[40px] rounded-[8px] border border-[#b75fc1] bg-white px-4 text-[13px] font-bold uppercase text-[#b75fc1] shadow-[1px_2px_3px_rgba(0,0,0,0.10)] transition hover:bg-[#fceefd] focus:outline-none focus:ring-2 focus:ring-[#b75fc1]/30"
+              >
+                Limpar
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-[12px]">
             {carregando && (
-              <p className="mt-4 text-center text-[12px] text-[#777]">
-                Carregando relatório...
-              </p>
+              <div className="rounded-[10px] border border-[#b75fc1] bg-white py-8 text-center text-[14px] text-[#252525] shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">
+                Carregando prestações de contas...
+              </div>
             )}
 
-            {!carregando && !documento && (
-              <p className="mt-4 text-center text-[12px] text-[#777]">
-                Nenhum relatório cadastrado ainda.
-              </p>
+            {!carregando && prestacoes.length === 0 && (
+              <div className="rounded-[10px] border border-[#b75fc1] bg-white px-6 py-10 text-center shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">
+                <p className="text-[16px] font-medium text-[#252525]">
+                  Nenhuma prestação de contas cadastrada ainda.
+                </p>
+
+                <p className="mt-2 text-[12px] font-light text-[#777]">
+                  Clique no botão + para adicionar o primeiro relatório.
+                </p>
+              </div>
             )}
 
-            {mensagemErro && (
-              <p className="mt-4 text-center text-[12px] font-medium text-red-600">
-                {mensagemErro}
-              </p>
-            )}
+            {!carregando &&
+              prestacoes.length > 0 &&
+              prestacoesFiltradas.length === 0 && (
+                <div className="rounded-[10px] border border-[#b75fc1] bg-white px-6 py-10 text-center shadow-[2px_3px_6px_rgba(0,0,0,0.10)]">
+                  <p className="text-[16px] font-medium text-[#252525]">
+                    Nenhum relatório encontrado.
+                  </p>
 
-            <button
-              type="button"
-              onClick={irParaAdicionarPrestacaoContas}
-              aria-label="Adicionar relatório mensal"
-              className="absolute right-[22px] top-1/2 flex h-[48px] w-[32px] -translate-y-1/2 items-center justify-center text-[66px] font-light leading-none text-[#b75fc1] transition hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#b75fc1]/40 md:right-[40px]"
-            >
-              ›
-            </button>
+                  <p className="mt-2 text-[12px] font-light text-[#777]">
+                    Tente alterar ou limpar os filtros.
+                  </p>
+                </div>
+              )}
+
+            {!carregando &&
+              prestacoesFiltradas.map((prestacao) => (
+                <CardPrestacaoContasAdmin
+                  key={prestacao.id}
+                  prestacao={prestacao}
+                />
+              ))}
           </div>
         </section>
 
-        <button
-          type="button"
-          onClick={sairDoPainel}
-          className="mt-[120px] h-[37px] w-[170px] rounded-[7px] bg-[#b75fc1] text-[16px] font-bold uppercase text-white shadow-[2px_3px_4px_rgba(0,0,0,0.22)] transition hover:bg-[#a94fb4] focus:outline-none focus:ring-2 focus:ring-[#b75fc1]/50"
+        <div className="mt-auto flex justify-center pb-[26px] pt-[28px]">
+          <button
+            type="button"
+            onClick={sairDoPainel}
+            className="h-[38px] w-[170px] rounded-[8px] bg-[#b75fc1] text-[15px] font-bold uppercase text-white shadow-[2px_3px_6px_rgba(0,0,0,0.18)] transition hover:bg-[#a94fb4] focus:outline-none focus:ring-2 focus:ring-[#b75fc1]/50"
+          >
+            Sair
+          </button>
+        </div>
+
+        <Link
+          href="/admin/prestacao-de-contas/adicionar"
+          aria-label="Adicionar prestação de contas"
+          className="fixed bottom-[28px] right-[28px] z-40 flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#b75fc1] text-[42px] font-light leading-none text-white shadow-[2px_4px_8px_rgba(0,0,0,0.22)] transition hover:scale-105 hover:bg-[#a94fb4] focus:outline-none focus:ring-2 focus:ring-[#b75fc1]/50"
         >
-          Sair
-        </button>
+          +
+        </Link>
       </div>
     </LayoutPainelAdmin>
   );
