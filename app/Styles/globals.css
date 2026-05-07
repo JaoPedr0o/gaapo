@@ -56,3 +56,10 @@ body {
   animation: sway 3s ease-in-out infinite;
   transform-origin: bottom;
 }
+
+.fundo-forminhas-admin {
+  background-image: url("/admin-forminhas-preto-transparente.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

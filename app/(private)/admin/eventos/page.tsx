@@ -1,5 +1,4 @@
 import PainelEventosAdmin from "./components/PainelEventosAdmin";
-
-export default function PaginaEventosAdmin() {
+export default function EventosAdminPage() {
   return <PainelEventosAdmin />;
 }

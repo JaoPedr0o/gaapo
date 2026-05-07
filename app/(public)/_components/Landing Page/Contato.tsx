@@ -45,7 +45,7 @@ export default function Contato() {
         <div className="w-full lg:max-w-[480px] flex flex-col gap-4">
           
           <input
-            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             type="text"
             placeholder="Nome"
             value={nome}
@@ -53,7 +53,7 @@ export default function Contato() {
           />
 
           <input
-            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             type="email"
             placeholder="Email"
             value={email}
@@ -61,7 +61,7 @@ export default function Contato() {
           />
 
           <textarea
-            className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             placeholder="Descrição"
             rows={4}
             value={descricao}

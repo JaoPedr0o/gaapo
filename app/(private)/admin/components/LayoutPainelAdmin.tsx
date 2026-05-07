@@ -1,8 +1,15 @@
+import type { ReactNode } from "react";
 import MenuLateralAdmin from "./MenuLateralAdmin";
 
+type PaginaAtivaAdmin =
+  | "adocao"
+  | "doacoes"
+  | "prestacao-contas"
+  | "eventos";
+
 type LayoutPainelAdminProps = {
-  children: React.ReactNode;
-  paginaAtiva: "adocao" | "doacoes" | "prestacao-contas" | "eventos";
+  children: ReactNode;
+  paginaAtiva: PaginaAtivaAdmin;
 };
 
 export default function LayoutPainelAdmin({
@@ -10,12 +17,12 @@ export default function LayoutPainelAdmin({
   paginaAtiva,
 }: LayoutPainelAdminProps) {
   return (
-    <main className="flex min-h-screen border-[2px] border-[#202020] bg-[#fde5ed]">
+    <div className="flex min-h-screen border-[3px] border-[#202020] bg-white">
       <MenuLateralAdmin paginaAtiva={paginaAtiva} />
 
-      <section className="flex min-h-screen flex-1 flex-col bg-[#fde5ed]">
+      <main className="min-h-screen flex-1 overflow-hidden pt-[58px] md:pt-0">
         {children}
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }
