@@ -24,8 +24,8 @@ export default function Footer() {
     waveColor = "#B3E5FC";
     footerColor = "#2B8CB4";
   } else if (pathname === "/eventos") {
-    waveColor = "#FCE6A8";
-    footerColor = "#C68F2E";
+    waveColor = "#FFB0C5";
+    footerColor = "#FFC8D6";
   } else if (pathname === "/contas") {
     waveColor = "#E9D6FF";
     footerColor = "#7F47A5";

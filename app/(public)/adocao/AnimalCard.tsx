@@ -17,7 +17,7 @@ export default function AnimalCard({ animal }: { animal: Animal }) {
         />
 
         <div className="px-4 py-3">
-          <h3 className="text-center font-bold">NOME DO ANIMAL</h3>
+          <h3 className="text-center font-bold">{animal.name}</h3>
           <div className="text-sm text-black mt-1 h-30 overflow-auto">
             <p>
               Texto sobre o animal aqui...
