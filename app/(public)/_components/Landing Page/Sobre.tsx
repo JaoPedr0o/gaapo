@@ -14,54 +14,56 @@ export default function Sobre() {
 
       {/* Ícones lado ESQUERDO */}
       {/* Osso topo esquerdo */}
-      <div className="absolute opacity-40 -rotate-45 pointer-events-none hidden md:block" style={{ left: '24px', top: '48px' }}>
-        <Image src={ossoBranco} alt="" aria-hidden width={90} height={90} />
+      <div className="absolute opacity-40 -rotate-45 pointer-events-none hidden md:block" style={{ left: '4px', top: '48px' }}>
+        <Image src={ossoBranco} alt="" aria-hidden width={99} height={90} />
       </div>
 
       {/* Pata esquerda superior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '4px', top: '240px' }}>
-        <Image src={pataBranca} alt="" aria-hidden width={90} height={70} />
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '34px', top: '240px' }}>
+        <Image src={pataBranca} alt="" aria-hidden width={99} height={70} />
       </div>
 
       {/* Cachorro esquerda */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '16px', top: '440px' }}>
-        <Image src={cachorroB} alt="" aria-hidden width={90} height={85} />
-      </div>
-
-      {/* Lata esquerda inferior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '32px', bottom: '70px' }}>
-        <Image src={lataB} alt="" aria-hidden width={90} height={70} />
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '4px', top: '440px' }}>
+        <Image src={cachorroB} alt="" aria-hidden width={99} height={85} />
       </div>
 
       {/* Pote esquerdo inferior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '32px', bottom: '250px' }}>
-        <Image src={poteB} alt="" aria-hidden width={90} height={70} />
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '34px', bottom: '250px' }}>
+        <Image src={poteB} alt="" aria-hidden width={99} height={70} />
       </div>
 
+
+      {/* Lata esquerda inferior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '4px', bottom: '70px' }}>
+        <Image src={lataB} alt="" aria-hidden width={99} height={70} />
+      </div>
+
+      
       {/*Ícones  lado DIREITO */}
 
       {/* Osso topo direito */}
-      <div className="absolute opacity-40 rotate-95 pointer-events-none hidden md:block" style={{ right: '24px', top: '48px' }}>
+      <div className="absolute opacity-40 rotate-95 pointer-events-none hidden md:block" style={{ right: '4px', top: '48px' }}>
         <Image src={ossoBranco} alt="" aria-hidden width={90} height={90} />
       </div>
 
       {/* Pata direita superior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '4px', top: '240px' }}>
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '54px', top: '240px' }}>
         <Image src={pataBranca} alt="" aria-hidden width={90} height={70} style={{ transform: 'scaleX(-1)' }} />
       </div>
 
       {/* Cachorro direita */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '16px', top: '440px' }}>
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '4px', top: '440px' }}>
         <Image src={cachorroB} alt="" aria-hidden width={90} height={85} style={{ transform: 'scaleX(-1)' }} />
       </div>
 
         {/* Pote esquerdo inferior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '32px', bottom: '250px' }}>
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '54px', bottom: '250px' }}>
         <Image src={poteB} alt="" aria-hidden width={90} height={70} />
       </div>
 
       {/* Lata direita inferior */}
-      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '32px', bottom: '70px' }}>
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '4px', bottom: '70px' }}>
         <Image src={lataB} alt="" aria-hidden width={90} height={70} />
       </div>
       {/* final*/}
