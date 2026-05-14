@@ -39,7 +39,7 @@ export default function Hero() {
                             </div>
                         </div>
 
-                        <div className="hidden xl:flex absolute bottom-0 right-0 w-3/5 max-w-[700px] h-[600px]">
+                        <div className="select-none hidden xl:flex absolute bottom-0 right-0 w-3/5 max-w-[700px] h-[600px]">
                             <Image
                                 src={heroDog}
                                 alt="Cachorro Hero"

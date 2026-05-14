@@ -12,9 +12,43 @@ export default function Contato() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    console.log({ nome, email, descricao });
+  const handleSubmit = async () => {
+    if (!nome || !email || !descricao) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/contato", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome,
+          email,
+          descricao,
+        }),
+      });
+
+      if (response.ok) {
+        alert("Mensagem enviada com sucesso!");
+
+        setNome("");
+        setEmail("");
+        setDescricao("");
+      } else {
+        alert("Erro ao enviar mensagem.");
+      }
+    } catch (error) {
+      alert("Erro no servidor.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,11 +75,11 @@ export default function Contato() {
           </p>
         </div>
 
-        {/* Direita*/}
+        {/* Direita */}
         <div className="w-full lg:max-w-[480px] flex flex-col gap-4">
-          
+
           <input
-            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             type="text"
             placeholder="Nome"
             value={nome}
@@ -53,7 +87,7 @@ export default function Contato() {
           />
 
           <input
-            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             type="email"
             placeholder="Email"
             value={email}
@@ -61,7 +95,7 @@ export default function Contato() {
           />
 
           <textarea
-            className="w-full py-3 px-4 sm:px-5 rounded-lg  -[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
+            className="w-full py-3 px-4 sm:px-5 rounded-lg border border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"
             placeholder="Descrição"
             rows={4}
             value={descricao}
@@ -69,10 +103,11 @@ export default function Contato() {
           />
 
           <button
-                onClick={handleSubmit}
-                className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center lg:self-start min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105"
-              >
-                Contato
+            onClick={handleSubmit}
+            disabled={loading}
+            className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center lg:self-start min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {loading ? "Enviando..." : "Contato"}
           </button>
         </div>
       </div>

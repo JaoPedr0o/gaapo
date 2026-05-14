@@ -18,8 +18,8 @@ export default function Footer() {
     waveColor = "#FFC8D6";
     footerColor = "#9B5FA8";
   } else if (pathname === "/adocao") {
-    waveColor = "#C1E1C1";
-    footerColor = "#64A454";
+    waveColor = "#FFC8D6";
+    footerColor = "#9B5FA8";
   } else if (pathname === "/doacao") {
     waveColor = "#B3E5FC";
     footerColor = "#2B8CB4";

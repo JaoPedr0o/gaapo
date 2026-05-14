@@ -67,7 +67,7 @@ const animais: Animal[] = [
     idade: "1 ano",
     sexo: "Fêmea",
     temperamento: "Afetuosa e tímida",
-    imagemUrl: "https://img.olx.com.br/images/25/252619753225071.jpg",
+    imagemUrl: "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_640/https://adimax.com.br/wp-content/uploads/2022/05/cuidados-filhote-de-cachorro.jpg",
   },
 ];
 
@@ -122,9 +122,9 @@ export default function Carrossel() {
       </div>
 
       {/* Carousel */}
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full max-w-[1400px] mx-auto ">
         <div className="overflow-hidden pl-3 lg:pl-0" ref={emblaRef}>
-          <div className="flex gap-3 md:gap-4 lg:gap-6 px-3 md:px-4 lg:px-0 pb-4 pr-4">
+          <div className=" select-none flex gap-3 md:gap-4 lg:gap-6 px-3 md:px-4 lg:px-0 pb-4 pr-4 ">
             {animais.map((animal) => (
               <div
                 key={animal.id}
@@ -136,7 +136,7 @@ export default function Carrossel() {
                   xl:flex-[0_0_27%]
                 "
               >
-                <div className="relative h-full">
+                <div className="relative h-full ">
 
                   {/* Sombra 3D rosa */}
                   <div className="absolute inset-0 bg-[#FFB0C5] rounded-[20px] translate-x-2.5 translate-y-2.5 lg:rounded-[24px] lg:translate-x-3 lg:translate-y-3"></div>
@@ -210,7 +210,7 @@ export default function Carrossel() {
       {/* Botão Ver mais */}
       <div className="mt-8 md:mt-10">
         <Link
-          href="/animais"
+          href="/adocao"
           className="inline-block bg-[#B569BE] text-white font-bold py-3 md:py-3.5 px-10 md:px-12 rounded-full shadow-md hover:brightness-110 transition-all hover:scale-105 text-sm md:text-base"
         >
           Ver mais

@@ -1,13 +1,75 @@
 import Image from "next/image";
 import sobreImg from "../assets/Sobre.svg";
 
+// Ícones decorativos
+import ossoBranco from "../assets/icones_branco/osso-B.svg";
+import pataBranca from "../assets/icones_branco/pata-B.svg";
+import cachorroB from "../assets/icones_branco/cachorro-B.svg";
+import lataB from "../assets/icones_branco/lata-B.svg";
+import poteB from "../assets/icones_branco/pote-B.svg";
+
 export default function Sobre() {
   return (
-    <section className="bg-[#B569BE] py-16 lg:py-28">
-      <div className="container mx-auto px-8 md:px-16 lg:px-20 max-w-7xl">
+    <section className="relative bg-[#B569BE] py-16 lg:py-28 overflow-hidden">
+
+      {/* Ícones lado ESQUERDO */}
+      {/* Osso topo esquerdo */}
+      <div className="absolute opacity-40 -rotate-45 pointer-events-none hidden md:block" style={{ left: '24px', top: '48px' }}>
+        <Image src={ossoBranco} alt="" aria-hidden width={90} height={90} />
+      </div>
+
+      {/* Pata esquerda superior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '4px', top: '240px' }}>
+        <Image src={pataBranca} alt="" aria-hidden width={90} height={70} />
+      </div>
+
+      {/* Cachorro esquerda */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '16px', top: '440px' }}>
+        <Image src={cachorroB} alt="" aria-hidden width={90} height={85} />
+      </div>
+
+      {/* Lata esquerda inferior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '32px', bottom: '70px' }}>
+        <Image src={lataB} alt="" aria-hidden width={90} height={70} />
+      </div>
+
+      {/* Pote esquerdo inferior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ left: '32px', bottom: '250px' }}>
+        <Image src={poteB} alt="" aria-hidden width={90} height={70} />
+      </div>
+
+      {/*Ícones  lado DIREITO */}
+
+      {/* Osso topo direito */}
+      <div className="absolute opacity-40 rotate-95 pointer-events-none hidden md:block" style={{ right: '24px', top: '48px' }}>
+        <Image src={ossoBranco} alt="" aria-hidden width={90} height={90} />
+      </div>
+
+      {/* Pata direita superior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '4px', top: '240px' }}>
+        <Image src={pataBranca} alt="" aria-hidden width={90} height={70} style={{ transform: 'scaleX(-1)' }} />
+      </div>
+
+      {/* Cachorro direita */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '16px', top: '440px' }}>
+        <Image src={cachorroB} alt="" aria-hidden width={90} height={85} style={{ transform: 'scaleX(-1)' }} />
+      </div>
+
+        {/* Pote esquerdo inferior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '32px', bottom: '250px' }}>
+        <Image src={poteB} alt="" aria-hidden width={90} height={70} />
+      </div>
+
+      {/* Lata direita inferior */}
+      <div className="absolute opacity-40 pointer-events-none hidden md:block" style={{ right: '32px', bottom: '70px' }}>
+        <Image src={lataB} alt="" aria-hidden width={90} height={70} />
+      </div>
+      {/* final*/}
+
+      <div className="container mx-auto px-8 md:px-16 lg:px-20 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          <div className="flex flex-col order-1 lg:order-1 items-start">
+          <div className="flex flex-col order-1 lg:order-1 items-start lg:ml-12">
             
             {/* Sobretítulo */}
             <div className="mb-6">
@@ -66,13 +128,8 @@ export default function Sobre() {
 
           {/* Imagem */}
           <div className="order-2 lg:order-2 relative w-full max-w-[250px] md:max-w-[320px] lg:max-w-[380px] mx-auto mt-6 lg:mt-0">
-            {/* Baixo detalhe azul (sombra) */}
             <div className="absolute top-3 left-3 w-full h-full rounded-xl bg-[#59C9DE] opacity-90" />
-
-            {/* Borda azul direita */}
             <div className="absolute inset-y-0 right-0 w-4 bg-[#59C9DE] rounded-r-xl" />
-
-            {/* Container da imagem */}
             <div className="relative aspect-[4/6] rounded-xl overflow-hidden shadow-xl bg-white z-10 group">
               <Image
                 src={sobreImg}
