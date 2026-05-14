@@ -18,7 +18,7 @@ export default function Sobre() {
 
       {/* Ícones lado ESQUERDO */}
       {/* Osso topo esquerdo */}
-      <div className="absolute opacity-40 -rotate-45 pointer-events-none hidden xl:block" style={{ left: '4px', top: '48px' }}>
+      <div className="absolute opacity-40 -rotate-185 pointer-events-none hidden xl:block" style={{ left: '4px', top: '48px' }}>
         <Image
           src={ossoBranco}
           alt=""
