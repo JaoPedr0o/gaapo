@@ -7,10 +7,9 @@ export default function Sobre() {
       <div className="container mx-auto px-8 md:px-16 lg:px-20 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Coluna 1: Texto */}
           <div className="flex flex-col order-1 lg:order-1 items-start">
             
-            {/* Sobretítulo estilo Badge (Igual à imagem) e Título */}
+            {/* Sobretítulo */}
             <div className="mb-6">
               <div className="inline-block bg-[#59C9DE] rounded-full px-6 py-2 mb-4">
                 <span className="text-black font-bold tracking-wide text-sm md:text-base">
@@ -44,7 +43,7 @@ export default function Sobre() {
               </p>
             </div>
 
-            {/* Diferenciais / Tópicos */}
+            {/* Diferenciais */}
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
               {[
                 "Tradição e Qualidade",
@@ -65,7 +64,7 @@ export default function Sobre() {
             
           </div>
 
-          {/* Coluna 2: Imagem */}
+          {/* Imagem */}
           <div className="order-2 lg:order-2 relative w-full max-w-[250px] md:max-w-[320px] lg:max-w-[380px] mx-auto mt-6 lg:mt-0">
             {/* Baixo detalhe azul (sombra) */}
             <div className="absolute top-3 left-3 w-full h-full rounded-xl bg-[#59C9DE] opacity-90" />

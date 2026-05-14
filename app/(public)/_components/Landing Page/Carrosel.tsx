@@ -192,7 +192,7 @@ export default function Carrossel() {
         </div>
       </div>
 
-      {/* Dots dinâmicos — gerados pelo Embla conforme os scroll snaps reais */}
+      {/* Dots dinâmicos */}
       <div className="flex gap-3 justify-center items-center mt-5 md:mt-6">
         {scrollSnaps.map((_, index) => (
           <button
