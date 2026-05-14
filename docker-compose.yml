@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gaapo_postgres
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: gaapo
+      POSTGRES_PASSWORD: gaapo
+      POSTGRES_DB: gaapo
+    volumes:
+      - gaapo_postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: gaapo_pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gaapo.com
+      PGADMIN_DEFAULT_PASSWORD: gaapo
+    depends_on:
+      - postgres
+    volumes:
+      - gaapo_pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  gaapo_postgres_data:
+  gaapo_pgadmin_data:

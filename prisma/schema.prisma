@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Animal {
+  id           String   @id @default(cuid())
+  nome         String
+  descricao    String
+  idade        String
+  sexo         String
+  especie      String
+  temperamento String
+  imagemUrl    String?
+  nomeImagem   String?
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+model Evento {
+  id           String   @id @default(cuid())
+  nome         String
+  descricao    String
+  data         String
+  horario      String
+  local        String
+  imagemUrl    String?
+  nomeImagem   String?
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+model ConfiguracaoDoacoes {
+  id                  String   @id @default(cuid())
+  chavePix            String
+  numeroContaBancaria String
+  textoInformativo    String
+  atualizadoEm        DateTime @updatedAt
+}
+
+enum TipoCadastro {
+  PDF
+  MANUAL
+}
+
+enum TipoMovimentacao {
+  ENTRADA
+  SAIDA
+}
+
+model PrestacaoContas {
+  id              String                   @id @default(cuid())
+  tipoCadastro    TipoCadastro
+  titulo          String
+  mesReferencia   String
+  anoReferencia   String
+  descricao       String
+  valorRecebido   Decimal                  @db.Decimal(10, 2)
+  valorGasto      Decimal                  @db.Decimal(10, 2)
+  saldoFinal      Decimal                  @db.Decimal(10, 2)
+  movimentacoes   MovimentacaoFinanceira[]
+  documentoUrl    String?
+  nomeDocumento   String?
+  dataCadastro    DateTime                 @default(now())
+  atualizadoEm    DateTime                 @updatedAt
+}
+
+model MovimentacaoFinanceira {
+  id                String           @id @default(cuid())
+  tipo              TipoMovimentacao
+  data              String
+  categoria         String
+  descricao         String
+  valor             Decimal          @db.Decimal(10, 2)
+  prestacaoContasId String
+  prestacaoContas   PrestacaoContas  @relation(fields: [prestacaoContasId], references: [id], onDelete: Cascade)
+}
+
+model Administrador {
+  id        String   @id @default(cuid())
+  usuario   String   @unique
+  senhaHash String
+  criadoEm  DateTime @default(now())
+}
