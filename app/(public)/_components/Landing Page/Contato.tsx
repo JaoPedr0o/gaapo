@@ -94,19 +94,8 @@ export default function Contato() {
         />
       </div>
 
-      {/* Gato esquerda */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ left: '4px', top: '440px', width: 100, height: 100 }}>
-        <Image
-          src={GatoR}
-          alt=""
-          aria-hidden
-          fill
-          style={{ objectFit: "contain" }}
-        />
-      </div>
-
       {/* Pote esquerdo inferior */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ left: '34px', bottom: '250px', width: 100, height: 100 }}>
+      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ left: '4px', bottom: '50px', width: 200, height: 200 }}>
         <Image
           src={poteR}
           alt=""
@@ -118,7 +107,7 @@ export default function Contato() {
 
 
       {/* Lata esquerda inferior */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ left: '4px', bottom: '70px', width: 100, height: 100 }}>
+      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ left: '324px', bottom: '150px', width: 100, height: 100 }}>
         <Image
           src={lataR}
           alt=""
@@ -132,9 +121,9 @@ export default function Contato() {
       {/*Ícones  lado DIREITO */}
 
       {/* Osso topo direito */}
-      <div className="absolute opacity-100 rotate-95 pointer-events-none hidden xl:block" style={{ right: '4px', top: '48px', width: 100, height: 100 }}>
+      <div className="absolute opacity-100 rotate-95 pointer-events-none hidden xl:block" style={{ right: '-14px', top: '-12px', width: 150, height: 150 }}>
         <Image
-          src={ossoRosa}
+          src={bola}
           alt=""
           aria-hidden
           fill
@@ -143,7 +132,7 @@ export default function Contato() {
       </div>
 
       {/* Pata direita superior */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '54px', top: '240px', width: 100, height: 100 }}>
+      <div className="absolute opacity-100 rotate-50 pointer-events-none hidden xl:block" style={{ right: '164px', top: '70px', width: 80, height: 80 }}>
         <Image
           src={pataRosa}
           alt=""
@@ -153,8 +142,8 @@ export default function Contato() {
         />
       </div>
 
-      {/* Cachorro direita */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '4px', top: '440px', width: 100, height: 100 }}>
+      {/* gato direita */}
+      <div className="absolute opacity-100 rotate-70 pointer-events-none hidden xl:block" style={{ right: '74px', top: '180px', width: 150, height: 150 }}>
         <Image
           src={GatoR}
           alt=""
@@ -165,7 +154,7 @@ export default function Contato() {
       </div>
 
         {/* Pote direito inferior */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '54px', bottom: '250px', width: 100, height: 100 }}>
+      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '290px', bottom: '325px', width: 100, height: 100 }}>
         <Image
           src={poteR}
           alt=""
@@ -175,10 +164,10 @@ export default function Contato() {
         />
       </div>
 
-      {/* Lata direita inferior */}
-      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '4px', bottom: '70px', width: 100, height: 100 }}>
+      {/* bola2 direita inferior */}
+      <div className="absolute opacity-100 pointer-events-none hidden xl:block" style={{ right: '30px', bottom: '10px', width: 150, height: 150 }}>
         <Image
-          src={lataR}
+          src={bola2}
           alt=""
           aria-hidden
           fill
@@ -237,7 +226,7 @@ export default function Contato() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center lg:self-start min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="bg-[#B569BE] text-white rounded-xl mt-2 py-3 px-6 text-xs sm:text-sm font-extrabold tracking-[1.6px] uppercase cursor-pointer self-center mx-auto min-w-[160px] shadow-md transition-all hover:brightness-110 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Enviando..." : "Contato"}
           </button>
