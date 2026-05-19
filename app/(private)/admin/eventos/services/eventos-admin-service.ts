@@ -1,163 +1,120 @@
 import type {
-    DadosEventoAdmin,
-    RespostaEventoAdmin,
-    RespostaListagemEventos,
+  DadosEventoAdmin,
+  RespostaEventoAdmin,
+  RespostaListagemEventos,
 } from "../types/evento-admin";
 
-const CHAVE_LOCAL_STORAGE = "gaapo_eventos_admin";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-function gerarIdTemporario() {
-    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-        return crypto.randomUUID();
-    }
-
-    return `evento-${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+function obterToken(): string {
+  if (typeof window === "undefined") return "";
+  return localStorage.getItem("gaapo_admin_token") ?? "";
 }
 
-function buscarEventosLocais(): DadosEventoAdmin[] {
-    if (typeof window === "undefined") {
-        return [];
-    }
-
-    const eventosSalvos = localStorage.getItem(CHAVE_LOCAL_STORAGE);
-
-    if (!eventosSalvos) {
-        return [];
-    }
-
-    try {
-        return JSON.parse(eventosSalvos) as DadosEventoAdmin[];
-    } catch {
-        return [];
-    }
-}
-
-function salvarEventosLocais(eventos: DadosEventoAdmin[]) {
-    if (typeof window === "undefined") {
-        return;
-    }
-
-    localStorage.setItem(CHAVE_LOCAL_STORAGE, JSON.stringify(eventos));
+function cabecalhosAdmin(): Record<string, string> {
+  return {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: `Bearer ${obterToken()}`,
+  };
 }
 
 export async function listarEventosAdmin(): Promise<RespostaListagemEventos> {
-    await new Promise((resolve) => setTimeout(resolve, 300));
+  const resposta = await fetch(`${API_URL}/admin/eventos`, {
+    headers: cabecalhosAdmin(),
+  });
 
+  const conteudo = (await resposta.json()) as RespostaListagemEventos;
+
+  if (!resposta.ok) {
     return {
-        sucesso: true,
-        eventos: buscarEventosLocais(),
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível listar os eventos.",
+      eventos: [],
     };
+  }
+
+  return conteudo;
 }
 
 export async function buscarEventoAdminPorId(
-    id: string
+  id: string
 ): Promise<RespostaEventoAdmin> {
-    await new Promise((resolve) => setTimeout(resolve, 300));
+  const resposta = await fetch(`${API_URL}/admin/eventos/${id}`, {
+    headers: cabecalhosAdmin(),
+  });
 
-    const evento = buscarEventosLocais().find((item) => item.id === id);
+  const conteudo = (await resposta.json()) as RespostaEventoAdmin;
 
-    if (!evento) {
-        return {
-            sucesso: false,
-            mensagem: "Evento não encontrado.",
-        };
-    }
-
+  if (!resposta.ok) {
     return {
-        sucesso: true,
-        evento,
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Evento não encontrado.",
     };
+  }
+
+  return conteudo;
 }
 
 export async function cadastrarEventoAdmin(
-    dadosEvento: DadosEventoAdmin
+  dadosEvento: DadosEventoAdmin
 ): Promise<RespostaEventoAdmin> {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+  const resposta = await fetch(`${API_URL}/admin/eventos`, {
+    method: "POST",
+    headers: cabecalhosAdmin(),
+    body: JSON.stringify(dadosEvento),
+  });
 
-    const novoEvento: DadosEventoAdmin = {
-        ...dadosEvento,
-        id: gerarIdTemporario(),
-    };
+  const conteudo = (await resposta.json()) as RespostaEventoAdmin;
 
-    const eventosAtuais = buscarEventosLocais();
-    const eventosAtualizados = [...eventosAtuais, novoEvento];
-
-    salvarEventosLocais(eventosAtualizados);
-
+  if (!resposta.ok) {
     return {
-        sucesso: true,
-        mensagem: "Evento cadastrado localmente.",
-        evento: novoEvento,
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível cadastrar o evento.",
     };
+  }
+
+  return conteudo;
 }
 
 export async function atualizarEventoAdmin(
-    id: string,
-    dadosEvento: DadosEventoAdmin
+  id: string,
+  dadosEvento: DadosEventoAdmin
 ): Promise<RespostaEventoAdmin> {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+  const resposta = await fetch(`${API_URL}/admin/eventos/${id}`, {
+    method: "PUT",
+    headers: cabecalhosAdmin(),
+    body: JSON.stringify(dadosEvento),
+  });
 
-    const eventosAtuais = buscarEventosLocais();
+  const conteudo = (await resposta.json()) as RespostaEventoAdmin;
 
-    const eventosAtualizados = eventosAtuais.map((evento) => {
-        if (evento.id === id) {
-            return {
-                ...dadosEvento,
-                id,
-            };
-        }
+  if (!resposta.ok) {
+    return {
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível atualizar o evento.",
+    };
+  }
 
-        return evento;
-    });
-
-    try {
-        salvarEventosLocais(eventosAtualizados);
-
-        return {
-            sucesso: true,
-            mensagem: "Evento atualizado localmente.",
-            evento: {
-                ...dadosEvento,
-                id,
-            },
-        };
-    } catch {
-        return {
-            sucesso: false,
-            mensagem:
-                "A imagem é muito grande para salvar temporariamente no navegador. Tente uma imagem menor.",
-        };
-    }
+  return conteudo;
 }
+
 export async function removerEventoAdmin(
   id: string
 ): Promise<RespostaEventoAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 400));
+  const resposta = await fetch(`${API_URL}/admin/eventos/${id}`, {
+    method: "DELETE",
+    headers: cabecalhosAdmin(),
+  });
 
-  const eventosAtuais = buscarEventosLocais();
+  const conteudo = (await resposta.json()) as RespostaEventoAdmin;
 
-  const eventoExiste = eventosAtuais.some((evento) => evento.id === id);
-
-  if (!eventoExiste) {
+  if (!resposta.ok) {
     return {
       sucesso: false,
-      mensagem: "Evento não encontrado.",
+      mensagem: conteudo.mensagem ?? "Não foi possível remover o evento.",
     };
   }
 
-  const eventosAtualizados = eventosAtuais.filter((evento) => evento.id !== id);
-
-  try {
-    salvarEventosLocais(eventosAtualizados);
-
-    return {
-      sucesso: true,
-      mensagem: "Evento removido com sucesso.",
-    };
-  } catch {
-    return {
-      sucesso: false,
-      mensagem: "Não foi possível remover o evento.",
-    };
-  }
+  return conteudo;
 }

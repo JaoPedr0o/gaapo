@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { DadosAnimalAdocao } from "../../types/animal-adocao";
 
@@ -38,12 +37,11 @@ export default function CardAnimalEdicao({
       className="group relative flex min-h-[96px] w-full items-center rounded-[10px] border border-[#f6a6bd] bg-white px-[18px] py-[14px] shadow-[2px_3px_6px_rgba(0,0,0,0.10)] transition hover:-translate-y-[1px] hover:shadow-[3px_5px_12px_rgba(0,0,0,0.14)]"
     >
       <div className="relative h-[64px] w-[74px] shrink-0 overflow-hidden rounded-[6px] bg-[#d8d8d8]">
-        {animal.imagemBase64 && (
-          <Image
-            src={animal.imagemBase64}
+        {animal.imagemUrl && (
+          <img
+            src={animal.imagemUrl}
             alt={`Imagem do animal ${animal.nome}`}
-            fill
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         )}
       </div>

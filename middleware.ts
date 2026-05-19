@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verificarToken } from "@/lib/jwt";
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/api/admin/login") {
     return NextResponse.next();
   }
@@ -9,10 +9,7 @@ export async function proxy(request: NextRequest) {
   const authHeader = request.headers.get("Authorization");
 
   if (!authHeader?.startsWith("Bearer ")) {
-    return NextResponse.json(
-      { mensagem: "Não autorizado." },
-      { status: 401 }
-    );
+    return NextResponse.json({ mensagem: "Não autorizado." }, { status: 401 });
   }
 
   try {

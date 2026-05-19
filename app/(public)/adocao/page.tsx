@@ -1,38 +1,34 @@
 "use client";
 
-import { useState } from "react";
-
-// 👉 IMPORTAR COMPONENTES AQUI
+import { useEffect, useState } from "react";
 import AnimalCard from "./AnimalCard";
 import FilterBar from "./FilterBar";
+import type { DadosAnimalAdocao } from "@/app/(private)/admin/adocao/types/animal-adocao";
 
-// 👉 DADOS MOCK (SUBSTITUA DEPOIS)
-const animals = [
-  { id: 1, name: "Luna", species: "cachorro", age: "2 anos", temperament: "Calmo", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 2, name: "Mingau", species: "gato", age: "1 ano", temperament: "Brincalhão", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 3, name: "Thor", species: "cachorro", age: "4 anos", temperament: "Protetor", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 4, name: "Nina", species: "gato", age: "3 anos", temperament: "Carinhosa", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 5, name: "Luna", species: "cachorro", age: "2 anos", temperament: "Calmo", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 6, name: "Mingau", species: "gato", age: "1 ano", temperament: "Brincalhão", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 7, name: "Thor", species: "cachorro", age: "4 anos", temperament: "Protetor", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 8, name: "Nina", species: "gato", age: "3 anos", temperament: "Carinhosa", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 9, name: "Luna", species: "cachorro", age: "2 anos", temperament: "Calmo", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 10, name: "Mingau", species: "gato", age: "1 ano", temperament: "Brincalhão", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 11, name: "Thor", species: "cachorro", age: "4 anos", temperament: "Protetor", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 12, name: "Nina", species: "gato", age: "3 anos", temperament: "Carinhosa", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 13, name: "Luna", species: "cachorro", age: "2 anos", temperament: "Calmo", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 14, name: "Mingau", species: "gato", age: "1 ano", temperament: "Brincalhão", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 15, name: "Thor", species: "cachorro", age: "4 anos", temperament: "Protetor", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  { id: 16, name: "Nina", species: "gato", age: "3 anos", temperament: "Carinhosa", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
-  
-];
+export default function AdocaoPage() {
+  const [animais, setAnimais] = useState<DadosAnimalAdocao[]>([]);
+  const [especie, setEspecie] = useState("");
+  const [carregando, setCarregando] = useState(true);
 
-export default function Home() {
- const [species, setSpecies] = useState("");
+  useEffect(() => {
+    async function carregarAnimais() {
+      try {
+        const resposta = await fetch("/api/animais");
+        const conteudo = await resposta.json() as { sucesso: boolean; animais: DadosAnimalAdocao[] };
+        if (conteudo.sucesso) {
+          setAnimais(conteudo.animais);
+        }
+      } finally {
+        setCarregando(false);
+      }
+    }
 
-  const filteredAnimals = animals.filter((animal) =>
-  species ? animal.species === species : true
-);
+    carregarAnimais();
+  }, []);
+
+  const animaisFiltrados = animais.filter((animal) =>
+    especie ? animal.especie === especie : true
+  );
 
   return (
     <main
@@ -45,9 +41,7 @@ export default function Home() {
       }}
     >
       <div className="relative z-10">
-      
-        {/* HEADER */}
-        <div className="text-center py-10 px-4 flex flex-col items-center gap-2 ">
+        <div className="text-center py-10 px-4 flex flex-col items-center gap-2">
           <h1
             className="text-4xl font-bold text-white rounded-full px-6 py-2"
             style={{ backgroundColor: "#5ec6d1" }}
@@ -63,17 +57,25 @@ export default function Home() {
           </p>
         </div>
 
-        {/* FILTRO */}
         <div className="flex justify-end px-6">
-          <FilterBar species={species} setSpecies={setSpecies} />
+          <FilterBar especie={especie} setEspecie={setEspecie} />
         </div>
 
-        {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-          {filteredAnimals.map((animal) => (
-            <AnimalCard key={animal.id} animal={animal} />
-          ))}
-        </div>
+        {carregando ? (
+          <div className="flex justify-center py-20 text-white text-lg">
+            Carregando animais...
+          </div>
+        ) : animaisFiltrados.length === 0 ? (
+          <div className="flex justify-center py-20 text-white text-lg">
+            Nenhum animal encontrado.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+            {animaisFiltrados.map((animal) => (
+              <AnimalCard key={animal.id} animal={animal} />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
