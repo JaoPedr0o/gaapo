@@ -126,7 +126,7 @@ export default function FormularioAdicionarAdocao() {
     }
 
     return (
-        <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fde5ed] bg-[url('/admin-forminhas-preto-transparente.svg')] bg-cover bg-center bg-no-repeat px-4 py-8">
+        <main className="flex min-h-screen items-center justify-center bg-[#fde5ed] bg-[url('/admin-forminhas-preto-transparente.svg')] bg-cover bg-center bg-no-repeat px-4 py-8">
             <section className="w-full max-w-[840px] rounded-[6px] bg-white px-[16px] pb-[14px] pt-[14px] shadow-[8px_8px_0_#f8a2bd] lg:w-[58vw] xl:w-[54vw] 2xl:w-[50vw]">
                 <form
                     onSubmit={enviarFormulario}
