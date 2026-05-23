@@ -158,11 +158,11 @@ export default function Carrossel() {
                         {animal.nome}
                       </h3>
 
-                      <p className="text-center text-[10px] md:text-[11px] text-gray-500 leading-relaxed mb-3 md:mb-4 lg:mb-5 px-1 md:px-2 line-clamp-4">
+                      <p className="text-center text-[10px] md:text-[15px] text-gray-500 leading-relaxed mb-3 md:mb-4 lg:mb-5 px-1 md:px-2 line-clamp-4">
                         {animal.descricao}
                       </p>
 
-                      <ul className="text-[10px] md:text-xs text-gray-600 mb-4 md:mb-5 lg:mb-6 space-y-1.5 md:space-y-2 ml-3 md:ml-4">
+                      <ul className="text-[10px] md:text-sm text-gray-600 mb-4 md:mb-5 lg:mb-6 space-y-1.5 md:space-y-2 ml-3 md:ml-4">
                         <li className="flex items-center gap-1.5 md:gap-2">
                           <span className="w-1 h-1 bg-gray-600 rounded-full flex-shrink-0"></span>
                           <strong>Idade:</strong> {animal.idade}
@@ -178,7 +178,7 @@ export default function Carrossel() {
                       </ul>
 
                       <div className="mt-auto flex justify-center">
-                        <button className="bg-[#FFB0C5] text-white font-bold py-2 md:py-2.5 px-6 md:px-8 rounded-full text-xs md:text-sm hover:opacity-90 transition w-[85%]">
+                        <button className="bg-[#FFB0C5] text-white font-bold py-2 md:py-2.5 px-6 md:px-8 rounded-full text-sm md:text-xl hover:opacity-90 transition w-[85%]">
                           Quero adotar!
                         </button>
                       </div>

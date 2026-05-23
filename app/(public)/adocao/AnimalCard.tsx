@@ -8,40 +8,52 @@ type Animal = {
 
 export default function AnimalCard({ animal }: { animal: Animal }) {
   return (
-    <div>
-      <div className="bg-white rounded-xl overflow-hidden border-r-4 border-b-4 border-brand-mediumPink rounded">
-        <img
-          src={animal.image}
-          alt={animal.name}
-          className="w-full h-40 object-cover"
-        />
+  <div className="h-full">
+    <div
+      className="
+        bg-white rounded-xl overflow-hidden
+        border-r-4 border-b-4 border-brand-darkPink
+        h-full flex flex-col
+      "
+    >
+      <img
+        src={animal.image}
+        alt={animal.name}
+        className="w-full h-60 object-cover"
+      />
 
-        <div className="px-4 py-3">
-          <h3 className="text-center font-bold">{animal.name}</h3>
-          <div className="text-sm text-black mt-1 h-30 overflow-auto">
+      <div className="p-4 flex flex-col flex-1">
+        
+        <div className="flex-1">
+          <h3 className="text-3xl text-center font-bold">
+            {animal.name}
+          </h3>
+
+          <div className="text-lg text-black mt-2 min-h-[100px]">
             <p>
               Texto sobre o animal aqui...
             </p>
           </div>
-          
 
-          <ul className="text-sm mt-2 text-gray-700">
+          <ul className="text-lg mt-4 text-gray-700">
             <li>• Idade: {animal.age}</li>
             <li>• Espécie: {animal.species}</li>
             <li>• Temperamento: {animal.temperament}</li>
           </ul>
-
-          <button
-            className="
-              mt-3 w-full text-white py-2 rounded-lg
-              bg-brand-mediumPink
-              hover:bg-brand-pink   /* COLOCAR A COR CERTA DPS */
-              transition-colors duration-200"
-          >
-            Quero adotar!
-          </button>
         </div>
+
+        <button
+          className="
+            mt-6 w-full text-white py-2 rounded-lg
+            bg-brand-darkPink
+            hover:bg-brand-lightPink
+            transition-colors duration-200
+          "
+        >
+          Quero adotar!
+        </button>
       </div>
     </div>
+  </div>
   );
 }

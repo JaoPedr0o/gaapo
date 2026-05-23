@@ -5,6 +5,10 @@ import { useState } from "react";
 import AnimalCard from "./AnimalCard";
 import FilterBar from "./FilterBar";
 
+const EVENTOS_BOTTOM_SVG = "/images/adocaoBottomVector.svg";
+const EVENTOS_HEADER_SVG = "/images/adocaoHeader1.svg";
+const EVENTOS_HEADER2_SVG = "/images/adocaoHeader2.svg";
+
 const animals = [
   { id: 1, name: "Luna", species: "cachorro", age: "2 anos", temperament: "Calmo", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
   { id: 2, name: "Mingau", species: "gato", age: "1 ano", temperament: "Brincalhão", image: "https://conexaoplaneta.com.br/wp-content/uploads/2016/12/curiosidade-animal-conexao-planeta-panda-vermelho-mathias-appel.jpg" },
@@ -36,28 +40,58 @@ export default function Home() {
     <main
       className="relative min-h-screen"
       style={{
-        backgroundImage: "url('/images/adocaoBg.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "repeat",
+        backgroundImage: "url('/images/Adocao.png')",
+        backgroundSize: "100%",
       }}
     >
-      <div className="z-10">
+      <div className="relative z-10">
       
         {/* HEADER */}
-        <div className="text-center py-10 px-4 flex flex-col items-center gap-2 ">
-          <div>
-            <h1 className="bg-[url('/images/adocaoHeader1.svg')] bg-no-repeat bg-center bg-size-[350px_100px] text-4xl font-bold text-white px-6 py-2">
-              ADOTE UM AMIGO!
-            </h1>
+        <div className="text-center pt-10 px-4 flex flex-col items-center gap-2">
+          {/* TITLE */}
+          <div
+            className="
+              relative
+              w-full max-w-2xl
+              min-h-30
+              flex items-center justify-center
+              bg-center bg-no-repeat
+            "
+            style={{
+              backgroundImage: `url('${EVENTOS_HEADER_SVG}')`,
+              backgroundSize: "100% 100%",
+            }}
+          >
+            <div className="px-8 md:px-14">
+              <h1 className="text-2xl md:text-6xl font-semibold text-white">
+                ADOTE UM AMIGO!
+              </h1>
+            </div>
           </div>
 
-          <p
-            className="mt-4 px-6 py-2 rounded-full text-white bold"
-            style={{ backgroundColor: "#5ec6d1" }}
+          {/* SUBTITLE */}
+          <div
+            className="
+              relative
+              w-full max-w-4xl
+              min-h-25
+              flex items-center justify-center
+              bg-center bg-no-repeat
+              -mt-4
+            "
+            style={{
+              backgroundImage: `url('${EVENTOS_HEADER2_SVG}')`,
+              backgroundSize: "100% 100%",
+            }}
           >
-            Transforme um abrigo em um lar. Adotar é o maior gesto de gratidão que você pode viver.
-          </p>
+            <div className="px-8 md:px-14">
+              <p className="text-sm md:text-lg font-medium text-white text-center">
+                Transforme um abrigo em um lar. Adotar é o maior gesto de gratidão
+                que você pode viver.
+              </p>
+            </div>
+          </div>
+
         </div>
 
         {/* FILTRO */}
@@ -66,11 +100,21 @@ export default function Home() {
         </div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 px-20">
+        <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-4 gap-6 p-6 pb-15 px-20">
           {filteredAnimals.map((animal) => (
             <AnimalCard key={animal.id} animal={animal} />
           ))}
         </div>
+      </div>
+
+      <div aria-hidden className="absolute bottom-0 left-0 w-full z-0 pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          
+          src={EVENTOS_BOTTOM_SVG}
+          alt=""
+          className="block w-full h-auto"
+        />
       </div>
     </main>
   );

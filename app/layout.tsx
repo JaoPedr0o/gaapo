@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Gaapo - Adoção de Animais",
+  title: "GAAPO",
   description: "Adoção de animais",
 };
 

@@ -4,29 +4,60 @@
   --background: #ffffff;
   --foreground: #171717;
   
-  /* Cores extraídas do seu design */
+  /* Cores extraídas do seu design (antigas cores)
   --gaapo-pink: #F8BBD0;
-  --gaapo-mediumPink: #FFB0C5;
+  --gaapo-pink: #FFB0C5;
   --gaapo-yellow: #FFD54F;
   --gaapo-blue: #C8F6FF;
   --gaapo-lightBlue: #CAE9EF;
   --gaapo-mediumBlue: #59C9DE;
   --gaapo-purple: #CE93D8;
   --gaapo-dark: #212121;
-  
+  */
+
+  --gaapo-pink: #FFBACC;
+  --gaapo-lightPink: #FFC8D6;
+  --gaapo-darkPink: #FFB0C5;
+  --gaapo-yellow: #FFD54F;
+  --gaapo-lightYellow: #FFE077;
+  --gaapo-blue: #9CDFEB;
+  --gaapo-lightBlue: #CAE9EF;
+  --gaapo-darkBlue: #59C9DE;
+  --gaapo-purple: #CB96D1;
+  --gaapo-lightPurple: #EDC1F3;
+  --gaapo-darkPurple: #B569BE;
+  --gaapo-dark: #212121;
+
 }
 
 @theme inline {
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui;
 
+  /* antigo brand-cor
   --color-brand-pink: var(--gaapo-pink);
   --color-brand-mediumPink: var(--gaapo-mediumPink);
+  --color-brand-darkPink: var(--gaapo-darkPink);
   --color-brand-yellow: var(--gaapo-yellow);
   --color-brand-blue: var(--gaapo-blue);
   --color-brand-lightBlue: var(--gaapo-lightBlue);
   --color-brand-mediumBlue: var(--gaapo-mediumBlue);
   --color-brand-purple: var(--gaapo-purple);
   --color-brand-dark: var(--gaapo-dark);
+  */
+
+  --color-brand-pink: var(--gaapo-pink);
+  --color-brand-lightPink: var(--gaapo-lightPink);
+  --color-brand-darkPink: var(--gaapo-darkPink);
+  --color-brand-yellow: var(--gaapo-yellow);
+  --color-brand-lightYellow: var(--gaapo-lightYellow);
+  --color-brand-blue: var(--gaapo-blue);
+  --color-brand-lightBlue: var(--gaapo-lightBlue);
+  --color-brand-darkBlue: var(--gaapo-darkBlue);
+  --color-brand-purple: var( --gaapo-purple);
+  --color-brand-lightPurple: var(--gaapo-lightPurple);
+  --color-brand-darkPurple: var(--gaapo-darkPurple);
+  --color-brand-dark: var(--gaapo-dark);
+  
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
