@@ -88,10 +88,9 @@ export default function EventoCard({ evento }: { evento: Evento }) {
       {/* IMAGEM */}
       {evento.image ? (
         <div className="relative w-full h-80 md:h-[28rem]">
-          <Image
+          <img
             src={evento.image}
             alt={`Foto do evento ${evento.titulo}`}
-            fill
             className="object-cover"
           />
         </div>

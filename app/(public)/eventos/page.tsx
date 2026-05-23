@@ -14,7 +14,7 @@ const eventosList: Evento[] = [
     horario: "09h às 17h",
     local: "Praça Central — Uberlândia, MG",
     dataPostagem: "12/05/2026",
-    image: "",
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft.ctcdn.com.br%2FlndE2SN9gxIECEAV3blQ_hKwEE8%3D%2F1400x788%2Fsmart%2Fi2147.jpeg&f=1&nofb=1&ipt=5939a3e312231b861fdd3b8c5293fe607f9fecf214a61089972ddb94dda39747",
   },
 
   {
