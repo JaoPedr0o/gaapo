@@ -23,6 +23,7 @@ export type DadosPrestacaoContasAdmin = {
   saldoFinal: string;
   movimentacoes: MovimentacaoPrestacaoContas[];
   documentoBase64?: string;
+  documentoUrl?: string;
   nomeDocumento?: string;
   dataCadastro: string;
 };

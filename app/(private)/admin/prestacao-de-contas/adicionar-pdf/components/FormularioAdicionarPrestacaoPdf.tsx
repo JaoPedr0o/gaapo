@@ -98,9 +98,7 @@ export default function FormularioAdicionarPrestacaoPdf() {
     const tamanhoEmMb = arquivo.size / 1024 / 1024;
 
     if (tamanhoEmMb > 5) {
-      setMensagemErro(
-        "O PDF deve ter no máximo 5MB enquanto estivermos salvando localmente."
-      );
+      setMensagemErro("O PDF deve ter no máximo 5MB.");
       event.target.value = "";
       return;
     }

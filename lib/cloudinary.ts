@@ -33,3 +33,17 @@ export async function deletarImagem(url: string): Promise<void> {
   if (!match) return;
   await cloudinary.uploader.destroy(match[1]);
 }
+
+export async function uploadPdf(base64: string, pasta: string): Promise<string> {
+  const resultado = await cloudinary.uploader.upload(base64, {
+    folder: `gaapo/${pasta}`,
+    resource_type: "raw",
+  });
+  return resultado.secure_url;
+}
+
+export async function deletarArquivo(url: string): Promise<void> {
+  const match = url.match(/\/raw\/upload\/v\d+\/(.+)$/);
+  if (!match) return;
+  await cloudinary.uploader.destroy(match[1], { resource_type: "raw" });
+}

@@ -3,59 +3,55 @@ import type {
   RespostaDoacoesAdmin,
 } from "../types/doacoes-admin";
 
-const CHAVE_LOCAL_STORAGE = "gaapo_doacoes_admin";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const dadosPadraoDoacoes: DadosDoacoesAdmin = {
-  chavePix: "sua-chave-pix@exemplo.com",
-  numeroContaBancaria: "Banco 000 - Ag. 0000 - Conta 00000-0",
-  textoInformativo: "Deseja fazer alguma doação e possuí dúvidas?",
-};
-
-function buscarDadosLocais(): DadosDoacoesAdmin {
-  if (typeof window === "undefined") {
-    return dadosPadraoDoacoes;
-  }
-
-  const dadosSalvos = localStorage.getItem(CHAVE_LOCAL_STORAGE);
-
-  if (!dadosSalvos) {
-    return dadosPadraoDoacoes;
-  }
-
-  try {
-    return JSON.parse(dadosSalvos) as DadosDoacoesAdmin;
-  } catch {
-    return dadosPadraoDoacoes;
-  }
+function obterToken(): string {
+  if (typeof window === "undefined") return "";
+  return localStorage.getItem("gaapo_admin_token") ?? "";
 }
 
-function salvarDadosLocais(dados: DadosDoacoesAdmin) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  localStorage.setItem(CHAVE_LOCAL_STORAGE, JSON.stringify(dados));
+function cabecalhosAdmin(): Record<string, string> {
+  return {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: `Bearer ${obterToken()}`,
+  };
 }
 
 export async function buscarDadosDoacoesAdmin(): Promise<RespostaDoacoesAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  const resposta = await fetch(`${API_URL}/admin/doacoes`, {
+    headers: cabecalhosAdmin(),
+  });
 
-  return {
-    sucesso: true,
-    dados: buscarDadosLocais(),
-  };
+  const conteudo = (await resposta.json()) as RespostaDoacoesAdmin;
+
+  if (!resposta.ok) {
+    return {
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível buscar as configurações de doação.",
+    };
+  }
+
+  return conteudo;
 }
 
 export async function salvarDadosDoacoesAdmin(
   dados: DadosDoacoesAdmin
 ): Promise<RespostaDoacoesAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  const resposta = await fetch(`${API_URL}/admin/doacoes`, {
+    method: "PUT",
+    headers: cabecalhosAdmin(),
+    body: JSON.stringify(dados),
+  });
 
-  salvarDadosLocais(dados);
+  const conteudo = (await resposta.json()) as RespostaDoacoesAdmin;
 
-  return {
-    sucesso: true,
-    mensagem: "Informações de doação salvas com sucesso.",
-    dados,
-  };
+  if (!resposta.ok) {
+    return {
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível salvar as configurações de doação.",
+    };
+  }
+
+  return conteudo;
 }
