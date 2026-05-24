@@ -33,7 +33,7 @@ export default function Mapa() {
             <div className="border-t border-white/20" />
 
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center">
                 <Clock className="text-white w-5 h-5" />
               </div>
               <div className="text-white">

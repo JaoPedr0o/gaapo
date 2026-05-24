@@ -7,8 +7,8 @@ type Props = {
 
 export default function FilterBar({ species, setSpecies }: Props) {
   return (
-    <div className="flex items-center">
-      <div className="flex items-center bg-white h-11 px-4 rounded-full shadow">
+    <div className="flex items-center w-full max-w-xs sm:max-w-none sm:w-auto">
+      <div className="flex items-center w-full sm:w-auto bg-white h-11 px-4 rounded-full shadow">
         
         <div className="flex items-center">
           <Icon icon="mdi:filter" width="20"></Icon>
@@ -21,8 +21,9 @@ export default function FilterBar({ species, setSpecies }: Props) {
           className="flex-1 h-full bg-transparent outline-none"
         >
           <option value="">Todos</option>
-          <option value="gato">Gatos</option>
-          <option value="cachorro">Cachorros</option>
+          <option value="cachorro">Cachorro</option>
+          <option value="gato">Gato</option>
+          <option value="outro">Outros</option>
         </select>
 
       </div>

@@ -28,8 +28,8 @@ export default function Contato() {
       <div className="max-w-7xl w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 xl:gap-28">
         
         {/* Esquerda */}
-        <div className="w-full lg:max-w-[480px] text-center lg:text-left">
-          <div className="inline-block bg-[#38C9C9] rounded-[12px_40px_36px_16px/20px_16px_28px_38px] py-4 px-6 sm:px-8 mb-6 sm:mb-8">
+        <div className="w-full lg:max-w-120 text-center lg:text-left">
+          <div className="inline-block bg-[#38C9C9] rounded-xl py-4 px-6 sm:px-8 mb-6 sm:mb-8">
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight">
               Tem alguma dúvida?
             </h2>
@@ -42,7 +42,7 @@ export default function Contato() {
         </div>
 
         {/* Direita*/}
-        <div className="w-full lg:max-w-[480px] flex flex-col gap-4">
+        <div className="w-full lg:max-w-120 flex flex-col gap-4">
           
           <input
             className="w-full py-3 px-4 sm:px-5 rounded-lg border-[3px] border-[#C88DCF] bg-white text-sm sm:text-base text-[#3a2a2a] outline-none transition-colors focus:border-[#38C9C9]"

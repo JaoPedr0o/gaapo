@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 
 export type Evento = {
   id: number;
@@ -16,6 +18,14 @@ function formatarDetalhe(valor?: string | null) {
 }
 
 export default function EventoCard({ evento }: { evento: Evento }) {
+  const imageUrl = evento.image?.trim() ?? "";
+  const [imagemCarregou, setImagemCarregou] = useState(Boolean(imageUrl));
+
+  useEffect(() => {
+    setImagemCarregou(Boolean(imageUrl));
+  }, [imageUrl]);
+
+  const exibirImagem = Boolean(imageUrl) && imagemCarregou;
   return (
     <article
       className="
@@ -32,11 +42,14 @@ export default function EventoCard({ evento }: { evento: Evento }) {
       {/* DATA DE POSTAGEM */}
       <span
         className="
-          absolute top-5 right-5 z-20
+          absolute top-2 right-2 z-20
+          md:top-5 md:right-5
           rounded-full
           bg-black/5
-          px-3 py-1
-          text-xs md:text-sm
+          px-1.5 py-0.5
+          md:px-3 md:py-1
+          text-[10px] leading-tight
+          md:text-sm
           font-medium
           text-gray-600
           backdrop-blur-sm
@@ -46,11 +59,11 @@ export default function EventoCard({ evento }: { evento: Evento }) {
       </span>
 
       {/* CONTEÚDO */}
-      <div className="px-8 py-8 md:px-10 md:py-10">
+      <div className="px-4 pt-10 pb-6 sm:px-6 sm:pt-8 sm:pb-8 md:px-10 md:py-10 md:pt-10">
         <h2
           className="
             text-center
-            text-2xl md:text-4xl
+            text-xl sm:text-2xl md:text-4xl
             font-bold
             uppercase
             tracking-wide
@@ -62,8 +75,8 @@ export default function EventoCard({ evento }: { evento: Evento }) {
 
         <p
           className="
-            mt-6
-            text-base md:text-xl
+            mt-4 sm:mt-6
+            text-sm sm:text-base md:text-xl
             leading-relaxed
             text-gray-600
           "
@@ -73,9 +86,9 @@ export default function EventoCard({ evento }: { evento: Evento }) {
 
         <ul
           className="
-            mt-8
-            space-y-2
-            text-base md:text-xl
+            mt-6 sm:mt-8
+            space-y-1 sm:space-y-2
+            text-sm sm:text-base md:text-xl
             text-gray-700
           "
         >
@@ -86,16 +99,14 @@ export default function EventoCard({ evento }: { evento: Evento }) {
       </div>
 
       {/* IMAGEM */}
-      {evento.image ? (
-        <div className="relative w-full h-80 md:h-[28rem]">
+      {exibirImagem && (
+        <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-112 overflow-hidden">
           <img
-            src={evento.image}
-            alt={`Foto do evento ${evento.titulo}`}
-            className="object-cover"
+            src={imageUrl}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            onError={() => setImagemCarregou(false)}
           />
-        </div>
-      ) : (
-        <div>
         </div>
       )}
     </article>
