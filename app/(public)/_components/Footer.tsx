@@ -18,16 +18,16 @@ export default function Footer() {
     waveColor = "#FFC8D6";
     footerColor = "#9B5FA8";
   } else if (pathname === "/adocao") {
-    waveColor = "#C1E1C1";
-    footerColor = "#64A454";
+    waveColor = "#59C9DE";
+    footerColor = "#9CDFEB";
   } else if (pathname === "/doacao") {
     waveColor = "#B3E5FC";
     footerColor = "#2B8CB4";
   } else if (pathname === "/eventos") {
-    waveColor = "#FCE6A8";
-    footerColor = "#C68F2E";
+    waveColor = "#FFB0C5";
+    footerColor = "#FFC8D6";
   } else if (pathname === "/contas") {
-    waveColor = "#E9D6FF";
+    waveColor = "#EDC1F3";
     footerColor = "#7F47A5";
   }
   return (
