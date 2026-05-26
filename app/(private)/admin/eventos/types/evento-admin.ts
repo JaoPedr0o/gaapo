@@ -6,6 +6,7 @@ export type DadosEventoAdmin = {
   horario: string;
   local: string;
   imagemBase64?: string;
+  imagemUrl?: string;
   nomeImagem?: string;
 };
 

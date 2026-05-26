@@ -1,11 +1,11 @@
 import { Icon } from "@iconify/react";
 
 type Props = {
-  species: string;
-  setSpecies: (value: string) => void;
+  especie: string;
+  setEspecie: (value: string) => void;
 };
 
-export default function FilterBar({ species, setSpecies }: Props) {
+export default function FilterBar({ especie, setEspecie }: Props) {
   return (
     <div className="flex items-center w-full max-w-xs sm:max-w-none sm:w-auto">
       <div className="flex items-center w-full sm:w-auto bg-white h-11 px-4 rounded-full shadow">

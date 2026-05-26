@@ -7,6 +7,7 @@ export type DadosAnimalAdocao = {
   especie: string;
   temperamento: string;
   imagemBase64?: string;
+  imagemUrl?: string;
   nomeImagem?: string;
 };
 

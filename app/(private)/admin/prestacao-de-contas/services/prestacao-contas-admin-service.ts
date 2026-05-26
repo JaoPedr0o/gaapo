@@ -4,172 +4,117 @@ import type {
   RespostaPrestacaoContasAdmin,
 } from "../types/prestacao-contas-admin";
 
-const CHAVE_LOCAL_STORAGE = "gaapo_prestacoes_contas_admin";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-function gerarIdTemporario() {
-  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-    return crypto.randomUUID();
-  }
-
-  return `prestacao-${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+function obterToken(): string {
+  if (typeof window === "undefined") return "";
+  return localStorage.getItem("gaapo_admin_token") ?? "";
 }
 
-function buscarPrestacoesLocais(): DadosPrestacaoContasAdmin[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
-  const dadosSalvos = localStorage.getItem(CHAVE_LOCAL_STORAGE);
-
-  if (!dadosSalvos) {
-    return [];
-  }
-
-  try {
-    return JSON.parse(dadosSalvos) as DadosPrestacaoContasAdmin[];
-  } catch {
-    return [];
-  }
-}
-
-function salvarPrestacoesLocais(prestacoes: DadosPrestacaoContasAdmin[]) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  localStorage.setItem(CHAVE_LOCAL_STORAGE, JSON.stringify(prestacoes));
+function cabecalhosAdmin(): Record<string, string> {
+  return {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: `Bearer ${obterToken()}`,
+  };
 }
 
 export async function listarPrestacoesContasAdmin(): Promise<RespostaListagemPrestacoesContas> {
-  await new Promise((resolve) => setTimeout(resolve, 250));
+  const resposta = await fetch(`${API_URL}/admin/prestacoes-contas`, {
+    headers: cabecalhosAdmin(),
+  });
 
-  return {
-    sucesso: true,
-    prestacoes: buscarPrestacoesLocais(),
-  };
+  const conteudo = (await resposta.json()) as RespostaListagemPrestacoesContas;
+
+  if (!resposta.ok) {
+    return {
+      sucesso: false,
+      mensagem: conteudo.mensagem ?? "Não foi possível listar as prestações de contas.",
+      prestacoes: [],
+    };
+  }
+
+  return conteudo;
 }
 
 export async function buscarPrestacaoContasPorId(
   id: string
 ): Promise<RespostaPrestacaoContasAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 250));
+  const resposta = await fetch(`${API_URL}/admin/prestacoes-contas/${id}`, {
+    headers: cabecalhosAdmin(),
+  });
 
-  const prestacao = buscarPrestacoesLocais().find((item) => item.id === id);
+  const conteudo = (await resposta.json()) as RespostaPrestacaoContasAdmin;
 
-  if (!prestacao) {
+  if (!resposta.ok) {
     return {
       sucesso: false,
-      mensagem: "Prestação de contas não encontrada.",
+      mensagem: conteudo.mensagem ?? "Prestação de contas não encontrada.",
     };
   }
 
-  return {
-    sucesso: true,
-    prestacao,
-  };
+  return conteudo;
 }
 
 export async function cadastrarPrestacaoContasAdmin(
   dadosPrestacao: DadosPrestacaoContasAdmin
 ): Promise<RespostaPrestacaoContasAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 400));
+  const resposta = await fetch(`${API_URL}/admin/prestacoes-contas`, {
+    method: "POST",
+    headers: cabecalhosAdmin(),
+    body: JSON.stringify(dadosPrestacao),
+  });
 
-  const novaPrestacao: DadosPrestacaoContasAdmin = {
-    ...dadosPrestacao,
-    id: gerarIdTemporario(),
-    dataCadastro: dadosPrestacao.dataCadastro || new Date().toISOString(),
-  };
+  const conteudo = (await resposta.json()) as RespostaPrestacaoContasAdmin;
 
-  const prestacoesAtuais = buscarPrestacoesLocais();
-  const prestacoesAtualizadas = [...prestacoesAtuais, novaPrestacao];
-
-  try {
-    salvarPrestacoesLocais(prestacoesAtualizadas);
-
-    return {
-      sucesso: true,
-      mensagem: "Prestação de contas cadastrada com sucesso.",
-      prestacao: novaPrestacao,
-    };
-  } catch {
+  if (!resposta.ok) {
     return {
       sucesso: false,
-      mensagem:
-        "Não foi possível salvar. O documento pode estar muito grande para armazenamento temporário.",
+      mensagem: conteudo.mensagem ?? "Não foi possível cadastrar a prestação de contas.",
     };
   }
+
+  return conteudo;
 }
 
 export async function atualizarPrestacaoContasAdmin(
   id: string,
   dadosPrestacao: DadosPrestacaoContasAdmin
 ): Promise<RespostaPrestacaoContasAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-
-  const prestacoesAtuais = buscarPrestacoesLocais();
-
-  const prestacoesAtualizadas = prestacoesAtuais.map((prestacao) => {
-    if (prestacao.id === id) {
-      return {
-        ...dadosPrestacao,
-        id,
-      };
-    }
-
-    return prestacao;
+  const resposta = await fetch(`${API_URL}/admin/prestacoes-contas/${id}`, {
+    method: "PUT",
+    headers: cabecalhosAdmin(),
+    body: JSON.stringify(dadosPrestacao),
   });
 
-  try {
-    salvarPrestacoesLocais(prestacoesAtualizadas);
+  const conteudo = (await resposta.json()) as RespostaPrestacaoContasAdmin;
 
-    return {
-      sucesso: true,
-      mensagem: "Prestação de contas atualizada com sucesso.",
-      prestacao: {
-        ...dadosPrestacao,
-        id,
-      },
-    };
-  } catch {
+  if (!resposta.ok) {
     return {
       sucesso: false,
-      mensagem:
-        "Não foi possível atualizar. O documento pode estar muito grande para armazenamento temporário.",
+      mensagem: conteudo.mensagem ?? "Não foi possível atualizar a prestação de contas.",
     };
   }
+
+  return conteudo;
 }
 
 export async function removerPrestacaoContasAdmin(
   id: string
 ): Promise<RespostaPrestacaoContasAdmin> {
-  await new Promise((resolve) => setTimeout(resolve, 350));
+  const resposta = await fetch(`${API_URL}/admin/prestacoes-contas/${id}`, {
+    method: "DELETE",
+    headers: cabecalhosAdmin(),
+  });
 
-  const prestacoesAtuais = buscarPrestacoesLocais();
+  const conteudo = (await resposta.json()) as RespostaPrestacaoContasAdmin;
 
-  const prestacaoExiste = prestacoesAtuais.some((item) => item.id === id);
-
-  if (!prestacaoExiste) {
+  if (!resposta.ok) {
     return {
       sucesso: false,
-      mensagem: "Prestação de contas não encontrada.",
+      mensagem: conteudo.mensagem ?? "Não foi possível remover a prestação de contas.",
     };
   }
 
-  const prestacoesAtualizadas = prestacoesAtuais.filter(
-    (prestacao) => prestacao.id !== id
-  );
-
-  try {
-    salvarPrestacoesLocais(prestacoesAtualizadas);
-
-    return {
-      sucesso: true,
-      mensagem: "Prestação de contas removida com sucesso.",
-    };
-  } catch {
-    return {
-      sucesso: false,
-      mensagem: "Não foi possível remover a prestação de contas.",
-    };
-  }
+  return conteudo;
 }

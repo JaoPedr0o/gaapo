@@ -177,7 +177,16 @@ const eventosList: Evento[] = [
 },
 ];
 
-export default function PaginaEventos() {
+import { useEffect, useState } from "react";
+import type { DadosEventoAdmin } from "@/app/(private)/admin/eventos/types/evento-admin";
+
+function formatarData(data: string) {
+  const partes = data.split("-");
+  if (partes.length !== 3) return data;
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+function CardEvento({ evento }: { evento: DadosEventoAdmin }) {
   return (
     <div
       className="relative overflow-x-hidden"
@@ -238,5 +247,75 @@ export default function PaginaEventos() {
         />
       </div>
     </div>
+  );
+}
+
+export default function EventosPage() {
+  const [eventos, setEventos] = useState<DadosEventoAdmin[]>([]);
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    async function carregarEventos() {
+      try {
+        const resposta = await fetch("/api/eventos");
+        const conteudo = (await resposta.json()) as {
+          sucesso: boolean;
+          eventos: DadosEventoAdmin[];
+        };
+        if (conteudo.sucesso) {
+          setEventos(conteudo.eventos);
+        }
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    carregarEventos();
+  }, []);
+
+  return (
+    <main
+      className="relative min-h-screen overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/adocaoBg.svg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="relative z-10">
+        <div className="text-center py-10 px-4 flex flex-col items-center gap-2">
+          <h1
+            className="text-4xl font-bold text-white rounded-full px-6 py-2"
+            style={{ backgroundColor: "#5ec6d1" }}
+          >
+            EVENTOS
+          </h1>
+
+          <p
+            className="mt-4 px-6 py-2 rounded-full text-white"
+            style={{ backgroundColor: "#5ec6d1" }}
+          >
+            Fique por dentro das ações e eventos do GAAPO.
+          </p>
+        </div>
+
+        {carregando ? (
+          <div className="flex justify-center py-20 text-white text-lg">
+            Carregando eventos...
+          </div>
+        ) : eventos.length === 0 ? (
+          <div className="flex justify-center py-20 text-white text-lg">
+            Nenhum evento cadastrado no momento.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+            {eventos.map((evento) => (
+              <CardEvento key={evento.id} evento={evento} />
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
   );
 }

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { DadosEventoAdmin } from "../../types/evento-admin";
 
@@ -35,12 +34,11 @@ export default function CardEventoEdicao({ evento }: CardEventoEdicaoProps) {
       className="group relative flex min-h-[96px] w-full items-center rounded-[10px] border border-[#52c4d7] bg-white px-[18px] py-[14px] shadow-[2px_3px_6px_rgba(0,0,0,0.10)] transition hover:-translate-y-[1px] hover:shadow-[3px_5px_12px_rgba(0,0,0,0.14)]"
     >
       <div className="relative h-[64px] w-[74px] shrink-0 overflow-hidden rounded-[6px] bg-[#d8d8d8]">
-        {evento.imagemBase64 && (
-          <Image
-            src={evento.imagemBase64}
+        {evento.imagemUrl && (
+          <img
+            src={evento.imagemUrl}
             alt={`Imagem do evento ${evento.nome}`}
-            fill
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         )}
       </div>

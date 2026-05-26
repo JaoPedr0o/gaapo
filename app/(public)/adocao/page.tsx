@@ -4,6 +4,12 @@ import { useState } from "react";
 
 import AnimalCard from "./AnimalCard";
 import FilterBar from "./FilterBar";
+import type { DadosAnimalAdocao } from "@/app/(private)/admin/adocao/types/animal-adocao";
+
+export default function AdocaoPage() {
+  const [animais, setAnimais] = useState<DadosAnimalAdocao[]>([]);
+  const [especie, setEspecie] = useState("");
+  const [carregando, setCarregando] = useState(true);
 
 const ADOCAO_BOTTOM_SVG = "/images/adocaoBottomVector.svg";
 const ADOCAO_HEADER_SVG = "/images/adocaoHeader1.svg";
@@ -440,8 +446,8 @@ const animals = [
 }
 ];
 
-export default function Home() {
- const [species, setSpecies] = useState("");
+    carregarAnimais();
+  }, []);
 
   const filteredAnimals = animals.filter((animal) => {
     if (!species) return true;
