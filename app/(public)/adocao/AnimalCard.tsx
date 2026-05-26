@@ -3,18 +3,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type Animal = {
-  id: number;
-  name: string;
-  species: string;
-  age: string;
-  temperament: string;
-  description: string;
-  image: string;
-};
+import type { DadosAnimalAdocao } from "@/app/(private)/admin/adocao/types/animal-adocao";
 
-function placeholderPorEspecie(species: string) {
-  switch (species) {
+function placeholderPorEspecie(especie: string) {
+  switch (especie.toLowerCase()) {
     case "cachorro":
       return "/images/placeholderDog.png";
     case "gato":
@@ -24,9 +16,9 @@ function placeholderPorEspecie(species: string) {
   }
 }
 
-export default function AnimalCard({ animal }: { animal: Animal }) {
-  const imageUrl = animal.image.trim();
-  const placeholder = placeholderPorEspecie(animal.species);
+export default function AnimalCard({ animal }: { animal: DadosAnimalAdocao }) {
+  const imageUrl = animal.imagemUrl?.trim() ?? "";
+  const placeholder = placeholderPorEspecie(animal.especie);
   const [falhaNaFoto, setFalhaNaFoto] = useState(false);
 
   useEffect(() => {
@@ -57,7 +49,7 @@ export default function AnimalCard({ animal }: { animal: Animal }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={imageUrl}
-              alt={animal.name}
+              alt={animal.nome}
               className="h-full w-full object-cover"
               onError={() => setFalhaNaFoto(true)}
             />
@@ -67,17 +59,17 @@ export default function AnimalCard({ animal }: { animal: Animal }) {
         <div className="p-3 sm:p-4 flex flex-col flex-1">
           <div className="flex-1">
             <h3 className="text-xl sm:text-2xl md:text-3xl text-center font-bold">
-              {animal.name}
+              {animal.nome}
             </h3>
 
             <div className="text-sm sm:text-base md:text-lg text-black mt-2 min-h-16 sm:min-h-20 md:min-h-[100px]">
-              <p>{animal.description}</p>
+              <p>{animal.descricao}</p>
             </div>
 
             <ul className="text-sm sm:text-base md:text-lg mt-3 sm:mt-4 text-gray-700">
-              <li>• Idade: {animal.age}</li>
-              <li>• Espécie: {animal.species}</li>
-              <li>• Temperamento: {animal.temperament}</li>
+              <li>• Idade: {animal.idade}</li>
+              <li>• Espécie: {animal.especie}</li>
+              <li>• Temperamento: {animal.temperamento}</li>
             </ul>
           </div>
 

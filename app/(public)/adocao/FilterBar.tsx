@@ -16,8 +16,8 @@ export default function FilterBar({ especie, setEspecie }: Props) {
         </div>
 
         <select
-          value={species}
-          onChange={(e) => setSpecies(e.target.value)}
+          value={especie}
+          onChange={(e) => setEspecie(e.target.value)}
           className="flex-1 h-full bg-transparent outline-none"
         >
           <option value="">Todos</option>

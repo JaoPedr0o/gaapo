@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export type Evento = {
-  id: number;
+  id: string | number;
   titulo: string;
   descricao: string;
   data: string | null;
