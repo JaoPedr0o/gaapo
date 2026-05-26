@@ -54,7 +54,7 @@ export default function Mapa() {
 
             {/* Mapa do Google Maps */}
 
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border-[3px] border-white">
+          <div className="relative w-full h-full rounded-2xl overflow-hidden  -white">
             <iframe
                 title="Mapa GAAPO – Presidente Olegário"
                 src="https://maps.google.com/maps?q=Presidente+Olegario+-+MG&t=&z=13&ie=UTF8&iwloc=&output=embed"

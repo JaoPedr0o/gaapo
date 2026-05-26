@@ -27,7 +27,7 @@ const paginasAdministrativas: PaginaAdministrativa[] = [
 
 export default function PainelSelecaoPaginas() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden border-[3px] border-[#202020] bg-[#f8f6f0] px-4 py-8">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden  -[#202020] bg-[#f8f6f0] px-4 py-8">
       <div className="absolute inset-0 z-0">
         <Image
           src="/fundo-selecao-admin.svg"

@@ -49,7 +49,7 @@ export default function FormularioLoginAdministrador() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fdfbf5] px-4 py-8">
+    <main className="flex min-h-screen items-center justify-center  -[#202020] bg-[#fdfbf5] px-4 py-8">
       <section className="flex h-auto min-h-[490px] w-full max-w-[486px] flex-col items-center rounded-[10px] border border-[#f5b900] bg-white px-[60px] pb-[52px] pt-[16px] shadow-[5px_5px_0_#f5b900] max-sm:px-6">
         <div className="mb-[48px] flex h-[134px] w-[134px] items-center justify-center rounded-full border-[5px] border-[#f5b900] bg-white">
           <Image
