@@ -18,7 +18,7 @@ export default function EscolhaTipoPrestacaoContas() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fceefd] fundo-forminhas-admin px-4 py-8">
+    <main className="flex min-h-screen items-center justify-center   bg-[#fceefd] fundo-forminhas-admin px-4 py-8">
       <section className="w-full max-w-[760px] rounded-[14px] border border-[#b75fc1] bg-white px-8 py-8 shadow-[8px_8px_0_#b75fc1]">
         <div className="mb-8 text-center">
           <h1 className="text-[24px] font-bold uppercase tracking-[0.5px] text-[#252525]">

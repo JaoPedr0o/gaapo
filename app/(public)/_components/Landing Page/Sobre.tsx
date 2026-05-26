@@ -12,7 +12,7 @@ export default function Sobre() {
             
             {/* Sobretítulo estilo Badge (Igual à imagem) e Título */}
             <div className="mb-6">
-              <div className="inline-block bg-[#59C9DE] rounded-full px-6 py-2 mb-4">
+              <div className="inline-block bg-brand-blue rounded-full px-6 py-2 mb-4">
                 <span className="text-black font-bold tracking-wide text-sm md:text-base">
                   Nossa História
                 </span>
@@ -53,7 +53,7 @@ export default function Sobre() {
                 "Transparência e Responsabilidade",
               ].map((item, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full bg-[#59C9DE] flex items-center justify-center flex-shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-brand-blue flex items-center justify-center shrink-0">
                     <svg className="w-4 h-4 text-[#B569BE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -66,15 +66,15 @@ export default function Sobre() {
           </div>
 
           {/* Coluna 2: Imagem */}
-          <div className="order-2 lg:order-2 relative w-full max-w-[250px] md:max-w-[320px] lg:max-w-[380px] mx-auto mt-6 lg:mt-0">
+          <div className="order-2 lg:order-2 relative w-full max-w-62.5 md:max-w-[320px] lg:max-w-95 mx-auto mt-6 lg:mt-0">
             {/* Baixo detalhe azul (sombra) */}
-            <div className="absolute top-3 left-3 w-full h-full rounded-xl bg-[#59C9DE] opacity-90" />
+            <div className="absolute top-3 left-3 w-full h-full rounded-xl bg-brand-blue opacity-90" />
 
             {/* Borda azul direita */}
-            <div className="absolute inset-y-0 right-0 w-4 bg-[#59C9DE] rounded-r-xl" />
+            <div className="absolute inset-y-0 right-0 w-4 bg-brand-blue rounded-r-xl" />
 
             {/* Container da imagem */}
-            <div className="relative aspect-[4/6] rounded-xl overflow-hidden shadow-xl bg-white z-10 group">
+            <div className="relative aspect-4/6 rounded-xl overflow-hidden shadow-xl bg-white z-10 group">
               <Image
                 src={sobreImg}
                 alt="Equipe GAAPO"

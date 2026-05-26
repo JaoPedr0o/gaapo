@@ -17,7 +17,7 @@ export default function LayoutPainelAdmin({
   paginaAtiva,
 }: LayoutPainelAdminProps) {
   return (
-    <div className="flex min-h-screen border-[3px] border-[#202020] bg-white">
+    <div className="flex min-h-screen   bg-white">
       <MenuLateralAdmin paginaAtiva={paginaAtiva} />
 
       <main className="min-h-screen flex-1 overflow-hidden pt-[58px] md:pt-0">

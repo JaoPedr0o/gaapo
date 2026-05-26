@@ -236,7 +236,7 @@ export default function FormularioAdicionarPrestacaoManual() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center border-[3px] border-[#202020] bg-[#fceefd] fundo-forminhas-admin px-4 py-8">
+    <main className="flex min-h-screen items-center justify-center   bg-[#fceefd] fundo-forminhas-admin px-4 py-8">
       <section className="w-full max-w-[1100px] rounded-[10px] bg-white px-[18px] pb-[16px] pt-[16px] shadow-[8px_8px_0_#b75fc1]">
         <form
           onSubmit={enviarFormulario}

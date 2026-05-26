@@ -1,36 +1,98 @@
-import type { DadosAnimalAdocao } from "@/app/(private)/admin/adocao/types/animal-adocao";
+"use client";
 
-export default function AnimalCard({ animal }: { animal: DadosAnimalAdocao }) {
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+type Animal = {
+  id: number;
+  name: string;
+  species: string;
+  age: string;
+  temperament: string;
+  description: string;
+  image: string;
+};
+
+function placeholderPorEspecie(species: string) {
+  switch (species) {
+    case "cachorro":
+      return "/images/placeholderDog.png";
+    case "gato":
+      return "/images/placeholderCat.png";
+    default:
+      return "/images/placeholderOutros.png";
+  }
+}
+
+export default function AnimalCard({ animal }: { animal: Animal }) {
+  const imageUrl = animal.image.trim();
+  const placeholder = placeholderPorEspecie(animal.species);
+  const [falhaNaFoto, setFalhaNaFoto] = useState(false);
+
+  useEffect(() => {
+    setFalhaNaFoto(false);
+  }, [imageUrl, animal.id]);
+
+  const usarPlaceholder = !imageUrl || falhaNaFoto;
+
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md">
-      {animal.imagemUrl ? (
-        <img
-          src={animal.imagemUrl}
-          alt={animal.nome}
-          className="w-full h-40 object-cover"
-        />
-      ) : (
-        <div className="w-full h-40 bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
-          Sem imagem
+    <div className="h-full">
+      <div
+        className="
+          bg-white rounded-xl overflow-hidden
+          border-r-4 border-b-4 border-brand-darkPink
+          h-full flex flex-col
+        "
+      >
+        <div className="relative h-48 w-full sm:h-56 md:h-60 shrink-0">
+          {usarPlaceholder ? (
+            <Image
+              src={placeholder}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageUrl}
+              alt={animal.name}
+              className="h-full w-full object-cover"
+              onError={() => setFalhaNaFoto(true)}
+            />
+          )}
         </div>
-      )}
 
-      <div className="p-4">
-        <h3 className="text-center font-bold">{animal.nome}</h3>
+        <div className="p-3 sm:p-4 flex flex-col flex-1">
+          <div className="flex-1">
+            <h3 className="text-xl sm:text-2xl md:text-3xl text-center font-bold">
+              {animal.name}
+            </h3>
 
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">{animal.descricao}</p>
+            <div className="text-sm sm:text-base md:text-lg text-black mt-2 min-h-16 sm:min-h-20 md:min-h-[100px]">
+              <p>{animal.description}</p>
+            </div>
 
-        <ul className="text-sm mt-2 text-gray-700">
-          <li>Idade: {animal.idade}</li>
-          <li>Espécie: {animal.especie}</li>
-          <li>Temperamento: {animal.temperamento}</li>
-        </ul>
+            <ul className="text-sm sm:text-base md:text-lg mt-3 sm:mt-4 text-gray-700">
+              <li>• Idade: {animal.age}</li>
+              <li>• Espécie: {animal.species}</li>
+              <li>• Temperamento: {animal.temperament}</li>
+            </ul>
+          </div>
 
-        <button
-          className="mt-3 w-full text-white py-2 rounded-lg bg-pink-300 hover:bg-pink-400 transition-colors duration-200"
-        >
-          Quero adotar!
-        </button>
+          <button
+            className="
+              mt-4 sm:mt-6 w-full text-white py-2 rounded-lg
+              text-sm sm:text-base
+              bg-brand-darkPink
+              hover:bg-brand-lightPink
+              transition-colors duration-200
+            "
+          >
+            Quero adotar!
+          </button>
+        </div>
       </div>
     </div>
   );
